@@ -177,6 +177,49 @@ const initReelsSwiper = () => {
   }
 };
 
+const initShowcaseSwiper = () => {
+  const swiperEl = document.querySelector('.showcase-swiper');
+  if (swiperEl) {
+    new Swiper(swiperEl, {
+      modules: [Autoplay, EffectFade],
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false,
+      },
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+    });
+  }
+};
+
+const initMaterialCards = () => {
+  const cards = document.querySelectorAll('.material-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const texture = card.querySelector('.material-texture');
+      const x = (e.clientX - card.getBoundingClientRect().left) / card.offsetWidth;
+      const y = (e.clientY - card.getBoundingClientRect().top) / card.offsetHeight;
+
+      texture.style.transform = `translate(${(x - 0.5) * 20}px, ${(y - 0.5) * 20}px) scale(1.1)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      const texture = card.querySelector('.material-texture');
+      texture.style.transform = 'translate(0, 0) scale(1)';
+    });
+  });
+};
+
 // Cart UI Handler (Same as before)
 const renderCart = () => {
   const existingModal = document.getElementById('cart-overlay');
@@ -283,6 +326,8 @@ const router = async () => {
   // Initialize new UI features
   initSwiper();
   initReelsSwiper();
+  initShowcaseSwiper();
+  initMaterialCards();
   handleShopEvents(initAnimations);
   initAnimations();
 

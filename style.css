@@ -1,18 +1,19 @@
 :root {
-    /* Colors */
-    --color-primary: #A1A1A1;
-    --color-primary-hover: #B0B0B0;
-    --color-secondary: #6A6A6A;
+    /* Colors - Cinematic B&W */
+    --color-primary: #FFFFFF;
+    --color-primary-hover: #E0E0E0;
+    --color-secondary: #808080;
+    --color-accent: #404040;
     --color-text-main: #FFFFFF;
-    --color-text-muted: #CCCCCC;
+    --color-text-muted: #888888;
     --color-text-light: #000000;
 
     --color-bg-body: #000000;
-    --color-bg-card: #131313;
-    --color-border: #242424;
-    --color-success: #28a745;
-    --color-danger: #dc3545;
-    --color-sale: #A1A1A1;
+    --color-bg-card: #050505;
+    --color-border: #1a1a1a;
+    --color-success: #FFFFFF;
+    --color-danger: #808080;
+    --color-sale: #FFFFFF;
 
     /* Typography */
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -103,6 +104,12 @@ button {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     height: 40px;
+}
+
+/* Reel Card */
+.reel-card {
+    background: transparent;
+    border: none;
 }
 
 .btn-primary {
@@ -534,7 +541,7 @@ button {
 
 /* Home Page Styles */
 .hero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&q=80&w=1600');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600');
     background-size: cover;
     background-position: center;
     height: 80vh;
@@ -596,20 +603,17 @@ button {
 }
 
 /* Professional Product Grid Layout */
-.product-grid {
+.product-grid,
+.home-product-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px 20px;
+    gap: 40px 20px;
 }
 
 @media (min-width: 768px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
-@media (min-width: 1200px) {
-    .product-grid {
+    .product-grid,
+    .home-product-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
@@ -620,7 +624,7 @@ button {
     border: none;
     border-radius: 0;
     overflow: visible;
-    transition: none;
+    transition: transform 0.3s ease;
     box-shadow: none;
     position: relative;
     display: flex;
@@ -628,9 +632,7 @@ button {
 }
 
 .product-card:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: transparent;
+    transform: translateY(-5px);
 }
 
 .product-image {
@@ -638,43 +640,70 @@ button {
     aspect-ratio: 1 / 1;
     height: auto;
     overflow: hidden;
-    border-radius: var(--radius-md);
-    background-color: var(--color-bg-card);
-    margin-bottom: var(--spacing-sm);
+    border-radius: 0;
+    /* Removed border radius for seamless look */
+    background-color: transparent;
+    margin-bottom: 0;
+    isolation: isolate;
 }
 
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.product-card:hover .product-image img {
-    transform: scale(1.05);
-}
-
-/* Quick Add Button Overlay */
-.product-image::after {
-    content: 'Quick Add';
+/* Seamless Gradient Overlay */
+.product-image::before {
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    text-align: center;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent 0%, #000000 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.image-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.product-card:hover .image-slider {
+    transform: translateX(-100%);
+}
+
+.product-image img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Quick Add Button Overlay - Refined */
+.product-image::after {
+    content: 'Quick Add';
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: auto;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border-radius: 30px;
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    font-size: 12px;
     text-transform: uppercase;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .product-card:hover .product-image::after {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
 }
 
 .badge {
@@ -685,49 +714,52 @@ button {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 2px;
+    border-radius: 4px;
     z-index: 2;
     letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
 }
 
 .badge-new {
-    background-color: var(--color-text-main);
-    color: var(--color-bg-body);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
 }
 
 .badge-sale {
-    background-color: var(--color-danger);
+    background-color: #ff3b30;
     color: #fff;
 }
 
 .product-info {
-    padding: 0;
-    text-align: left;
+    padding: 10px 0;
+    text-align: center;
+    /* Center aligned for premium feel */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: #000000;
+    width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .product-info h3 {
-    font-size: var(--font-size-base);
+    font-size: 15px;
     font-weight: 500;
-    margin-bottom: 4px;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: 1.3;
+    margin-bottom: 6px;
+    color: #fff;
+    letter-spacing: 0.3px;
 }
 
 .product-info .price {
-    font-weight: 600;
-    color: var(--color-text-main);
-    margin-bottom: 0;
-    font-size: var(--font-size-base);
+    font-weight: 400;
+    color: #888;
+    font-size: 14px;
 }
 
 .btn-link {
     display: none;
-    /* Hide 'View Details' link for cleaner look */
 }
 
 /* Promo Banner */
@@ -770,7 +802,7 @@ button {
 }
 
 .category-card {
-    background-color: var(--color-bg-card);
+    background-color: transparent;
     height: 350px;
     /* Taller cards */
     display: flex;
@@ -2794,6 +2826,7 @@ button {
         height: 30px;
     }
 }
+
 /* Premium iPhone Case Carousel */
 .iphone-carousel-section {
     padding: 80px 0;
@@ -2802,7 +2835,8 @@ button {
 }
 
 .iphone-case-swiper {
-    padding-bottom: 50px; /* Space for pagination */
+    padding-bottom: 50px;
+    /* Space for pagination */
 }
 
 .case-card {
@@ -2818,7 +2852,7 @@ button {
 
 .case-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     border-color: var(--color-primary);
 }
 
@@ -2882,4 +2916,446 @@ button {
     background: var(--color-primary);
     width: 30px;
     border-radius: 5px;
+}
+
+/* CINEMATIC THEME STYLES */
+
+/* 1. Spotlight Hero */
+.hero-cinematic {
+    height: 100vh;
+    background-color: #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.6;
+    /* Adjust for brightness */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark overlay */
+    z-index: 1;
+}
+
+.spotlight {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 150%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+    animation: pulseSpotlight 8s infinite alternate;
+}
+
+@keyframes pulseSpotlight {
+    0% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.hero-content-cinematic {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero-phone-reveal {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    transform: scale(0.9) translateY(50px);
+    animation: revealPhone 2.5s cubic-bezier(0.19, 1, 0.22, 1) forwards, floatPhone 6s ease-in-out infinite 2.5s;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes revealPhone {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes floatPhone {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+.hero-title-cinematic {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: transparent;
+    background: linear-gradient(90deg, #333 0%, #fff 50%, #333 100%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textShimmer 5s linear infinite;
+    opacity: 0;
+    animation: textShimmer 5s linear infinite, fadeInText 1s ease-out 6s forwards;
+}
+
+@keyframes textShimmer {
+    0% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+@keyframes fadeInText {
+    to {
+        opacity: 1;
+    }
+}
+
+.btn-cinematic {
+    margin-top: 30px;
+    padding: 15px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    background: transparent;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpBtn 1s ease-out 6s forwards;
+}
+
+.btn-cinematic:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideUpBtn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. Horizontal Scroll Showcase (Swiper) */
+.showcase-section {
+    padding: 100px 0 0 0;
+    background: #050505;
+    overflow: hidden;
+}
+
+.showcase-swiper {
+    padding: 50px 0;
+    perspective: 1000px;
+}
+
+.showcase-slide {
+    width: 300px;
+    height: 500px;
+    transition: all 0.5s ease;
+    filter: blur(2px) grayscale(100%);
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+.showcase-slide.swiper-slide-active {
+    filter: blur(0) grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+    z-index: 10;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.showcase-card {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #222;
+}
+
+.showcase-card img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.showcase-info {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.showcase-slide.swiper-slide-active .showcase-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Design Philosophy (Sketch to Real) */
+.philosophy-section {
+    padding: 50px 0 100px 0;
+    background: #000;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    /* Increased gap */
+    background: transparent;
+}
+
+.philosophy-item {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: #000;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.philo-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+
+
+.philo-real {
+    z-index: 1;
+    transform: scale(1);
+}
+
+.philo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.philo-text {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 4;
+    pointer-events: none;
+    transform: translateY(0);
+}
+
+/* 4. Best Sellers (Cinematic Zoom) */
+.cinematic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .cinematic-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+.cinematic-card {
+    background: transparent;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    /* Ensure images don't overflow */
+}
+
+.cinematic-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+}
+
+.cinematic-image-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cinematic-image-slider img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cinematic-card:hover .cinematic-image-slider {
+    transform: translateX(-100%);
+}
+
+.cinematic-add-btn {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 6px 15px;
+    /* Smaller padding */
+    margin-top: 10px;
+    font-size: 0.7rem;
+    /* Smaller font */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 1;
+    /* Always visible */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+    display: inline-block;
+}
+
+
+
+.cinematic-add-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+
+
+/* 5. Materials (Texture Cards) */
+.materials-section {
+    padding: 100px 0;
+    background: #050505;
+}
+
+.material-card {
+    height: 400px;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+}
+
+.material-card:hover {
+    border-color: #fff;
+}
+
+.material-texture {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    opacity: 0.3;
+    transition: transform 0.1s linear;
+}
+
+.material-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* 6. Minimal Footer */
+.footer-minimal {
+    padding: 80px 0;
+    background: #000;
+    text-align: center;
+    border-top: 1px solid #111;
+}
+
+.footer-logo-text {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-block;
+    color: #fff;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-nav a {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+.footer-copy {
+    color: #333;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }

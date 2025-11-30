@@ -44,7 +44,7 @@ export const products = [
     rating: 4.6,
     reviews: 150,
     isNew: true,
-    isBestSeller: false,
+    isBestSeller: true,
     description: "Heavy-duty protection for the toughest environments. Dual-layer design with shock-absorption technology."
   },
   {
