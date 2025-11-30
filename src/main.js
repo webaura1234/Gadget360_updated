@@ -122,7 +122,8 @@ const initAnimations = () => {
 // Initialize Swiper
 const initSwiper = () => {
   const swiperEl = document.querySelector('.swiper');
-  if (swiperEl) {
+  // Only init main hero swiper if it doesn't have reels-swiper class
+  if (swiperEl && !swiperEl.classList.contains('reels-swiper')) {
     new Swiper(swiperEl, {
       modules: [Navigation, Pagination, Autoplay, EffectFade],
       loop: true,
@@ -138,6 +139,40 @@ const initSwiper = () => {
         clickable: true,
       },
       // Navigation arrows removed
+    });
+  }
+};
+
+const initReelsSwiper = () => {
+  const swiperEl = document.querySelector('.reels-swiper');
+  if (swiperEl) {
+    new Swiper(swiperEl, {
+      modules: [Autoplay],
+      slidesPerView: 1.2,
+      spaceBetween: 10,
+      loop: false,
+      slidesOffsetBefore: 20,
+      slidesOffsetAfter: 20,
+      grabCursor: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      breakpoints: {
+        500: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        }
+      },
     });
   }
 };
@@ -247,6 +282,7 @@ const router = async () => {
 
   // Initialize new UI features
   initSwiper();
+  initReelsSwiper();
   handleShopEvents(initAnimations);
   initAnimations();
 
@@ -551,12 +587,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const header = document.querySelector('.site-header');
+  let lastScrollTop = 0;
+
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
+    const scrollTop = window.scrollY;
+
+    // Glass effect logic
+    if (scrollTop > 10) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
+
+    // Hide/Show logic
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      // Scrolling down -> Hide
+      header.classList.add('nav-hidden');
+    } else {
+      // Scrolling up -> Show
+      header.classList.remove('nav-hidden');
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });
 
   router();
