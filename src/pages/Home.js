@@ -5,84 +5,101 @@ export function Home() {
 
   return `
     <!-- 1. Spotlight Hero -->
-    <section class="hero-cinematic">
-      <video class="hero-video" autoplay muted playsinline>
-        <source src="https://res.cloudinary.com/djb258n8t/video/upload/v1764533868/Dramatic_iPhone_Case_Animation_Creation_wzu3f0.mp4" type="video/mp4">
-      </video>
-      <div class="hero-overlay"></div>
-      <div class="spotlight"></div>
-      <div class="hero-content-cinematic">
-
-
-        <h1 class="hero-title-cinematic">Crafted for the Bold</h1>
-        <a href="/shop" class="btn btn-cinematic" data-link>Explore iPhone Cases</a>
+    <!-- 1. Spotlight Hero (Carousel) -->
+    <section class="hero-cinematic" style="padding: 0; height: 80vh; min-height: 600px;">
+      <div class="swiper hero-swiper" style="width: 100%; height: 100%;">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_02_v2.jpg?v=1753091030&width=1800" alt="Hero 1" class="hero-slide-image">
+          </div>
+          <div class="swiper-slide">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_03.jpg?v=1753091030&width=1800" alt="Hero 2" class="hero-slide-image">
+          </div>
+          <div class="swiper-slide">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_01_v2_ef6e1b14-26e9-470e-9da1-0ab0eede4c24.jpg?v=1753101304&width=1800" alt="Hero 3" class="hero-slide-image">
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
-    <!-- 2. Best Sellers (Cinematic Zoom) -->
-    <section class="section container" style="padding: 100px 20px;">
-      <div class="section-header" style="border-bottom: 1px solid #222;">
-        <h2 style="text-transform: uppercase; letter-spacing: 3px; font-weight: 300;">Best Sellers</h2>
-        <a href="/shop" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;" data-link>View All</a>
-      </div>
-      <div class="cinematic-grid">
-        ${bestSellers.map(product => `
-          <div class="cinematic-card">
-            <a href="/product/${product.id}" data-link style="display: block; text-align: center;">
-              <div class="cinematic-image-wrapper">
-                <div class="cinematic-image-slider">
-                  <img src="${product.image}" alt="${product.name}">
-                  <img src="${product.altImage || product.image}" alt="${product.name} Alternate">
+    <!-- 2. Best Sellers (Updated Design) -->
+    <section class="best-seller-section">
+      <div class="container">
+        <div class="best-seller-header">
+          <!-- Buttons removed as per request -->
+        </div>
+
+        <div class="best-seller-grid">
+          ${bestSellers.slice(0, 4).map(product => `
+            <div class="best-seller-card">
+              <div class="best-seller-badge">BUY 1 GET 2</div>
+              <a href="/product/${product.id}" data-link style="display: block; width: 100%;">
+                <div class="best-seller-image-wrapper">
+                  <img src="${product.image}" alt="${product.name}" class="img-primary">
+                  <img src="${product.altImage || product.image}" alt="${product.name} Alt" class="img-secondary">
                 </div>
+                <div class="best-seller-info">
+                  <h3 class="best-seller-title">${product.name}</h3>
+                  <p class="best-seller-price">From Rs. ${product.price.toFixed(2)}</p>
+                </div>
+              </a>
+              
+              <!-- Thumbnails (Placeholder logic: using same image + alt image if available) -->
+              <div class="best-seller-thumbnails">
+                <img src="${product.image}" class="best-seller-thumb" alt="Variant 1">
+                <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 2">
+                <img src="${product.image}" class="best-seller-thumb" alt="Variant 3">
+                <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 4">
               </div>
-              <h3 style="font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 1px;">${product.name}</h3>
-              <p style="color: #666;">₹${product.price.toFixed(2)}</p>
-            </a>
-            <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}">Quick Add</button>
-          </div>
-        `).join('')}
-      </div>
-      <div class="text-center" style="margin-top: 60px;">
-        <a href="/shop" class="btn btn-cinematic" style="color: #fff; border-color: #333;" data-link>EXPLORE MORE</a>
+
+              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="margin-top: 15px; width: 100%;">Quick Add</button>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="best-seller-grid">
+          ${bestSellers.slice(4, 8).map(product => `
+            <div class="best-seller-card">
+              <div class="best-seller-badge">BUY 1 GET 2</div>
+              <a href="/product/${product.id}" data-link style="display: block; width: 100%;">
+                <div class="best-seller-image-wrapper">
+                  <img src="${product.image}" alt="${product.name}" class="img-primary">
+                  <img src="${product.altImage || product.image}" alt="${product.name} Alt" class="img-secondary">
+                </div>
+                <div class="best-seller-info">
+                  <h3 class="best-seller-title">${product.name}</h3>
+                  <p class="best-seller-price">From Rs. ${product.price.toFixed(2)}</p>
+                </div>
+              </a>
+              
+              <!-- Thumbnails (Placeholder logic: using same image + alt image if available) -->
+              <div class="best-seller-thumbnails">
+                <img src="${product.image}" class="best-seller-thumb" alt="Variant 1">
+                <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 2">
+                <img src="${product.image}" class="best-seller-thumb" alt="Variant 3">
+                <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 4">
+              </div>
+
+              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="margin-top: 15px; width: 100%;">Quick Add</button>
+            </div>
+          `).join('')}
+        </div>
+        
+        <div class="text-center" style="margin-top: 60px;">
+          <a href="/shop" class="btn btn-cinematic" style="color: #000; border-color: #000;" data-link>Load more</a>
+        </div>
       </div>
     </section>
 
-    <!-- 3. Design Philosophy (Sketch to Real) -->
-    <section class="philosophy-section">
-      <div class="container" style="margin-bottom: 60px; text-align: center;">
-        <h2 style="text-transform: uppercase; letter-spacing: 3px; font-weight: 300; margin-bottom: 20px;">Design Philosophy</h2>
-        <p style="color: #666; max-width: 600px; margin: 0 auto;">From concept to reality. Hover to reveal the final form.</p>
-      </div>
-      <div class="philosophy-grid">
-        <div class="philosophy-item">
-          <img src="https://images.unsplash.com/photo-1603313011101-320f26a4f6f6?auto=format&fit=crop&q=80&w=800" class="philo-img philo-real">
-          <div class="philo-overlay"></div>
-          <div class="philo-text">
-            <h3 style="text-transform: uppercase; letter-spacing: 2px;">Minimalist</h3>
-          </div>
-        </div>
-        <div class="philosophy-item">
-          <img src="https://images.unsplash.com/photo-1623126908029-58cb08a2b272?auto=format&fit=crop&q=80&w=800" class="philo-img philo-real">
-          <div class="philo-overlay"></div>
-          <div class="philo-text">
-            <h3 style="text-transform: uppercase; letter-spacing: 2px;">Precision</h3>
-          </div>
-        </div>
-        <div class="philosophy-item">
-          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" class="philo-img philo-real">
-          <div class="philo-overlay"></div>
-          <div class="philo-text">
-            <h3 style="text-transform: uppercase; letter-spacing: 2px;">Durability</h3>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- 4. Materials & Protection -->
     <section class="materials-section">
       <div class="container">
         <h2 class="text-center" style="margin-bottom: 60px; text-transform: uppercase; letter-spacing: 3px; font-weight: 300;">Advanced Materials</h2>
-        <div class="grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; background: #222;">
+
+        <div class="materials-grid">
           
           <div class="material-card">
             <div class="material-texture" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
@@ -112,18 +129,273 @@ export function Home() {
       </div>
     </section>
 
-    <!-- 5. Minimal Footer -->
-    <footer class="footer-minimal">
+    <!-- 5. Reels Review Section -->
+    <section class="reels-section animate-on-scroll" style="background-color: #f6f6f6;">
       <div class="container">
-        <div class="footer-logo-text">GADGET360</div>
-        <nav class="footer-nav">
-          <a href="/shop" data-link>Shop</a>
-          <a href="/about" data-link>About</a>
-          <a href="/journal" data-link>Journal</a>
-          <a href="/contact" data-link>Contact</a>
-        </nav>
-        <div class="footer-copy">
-          &copy; 2025 GADGET360. All Rights Reserved.
+        <div class="reels-header">
+          <h2>Unboxing the Truth</h2>
+          <p>Real customers. Real reviews. Real protection.</p>
+        </div>
+      </div>
+
+      <div class="reels-container">
+        <div class="swiper reels-swiper">
+          <div class="swiper-wrapper">
+            <!-- Reel 1 -->
+            <div class="swiper-slide">
+              <div class="reel-card">
+                <video src="https://cdn.pixabay.com/video/2024/03/04/202987-919379330_large.mp4"
+                  poster="https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&q=80&w=600"
+                  autoplay muted loop playsinline webkit-playsinline class="reel-video"></video>
+                <div class="reel-label">Screen Guard Installation</div>
+              </div>
+            </div>
+            <!-- Reel 2 -->
+            <div class="swiper-slide">
+              <div class="reel-card">
+                <video src="https://cdn.pixabay.com/video/2020/05/04/38084-416330724_large.mp4"
+                  poster="https://images.unsplash.com/photo-1592434134753-a70baf7979d5?auto=format&fit=crop&q=80&w=600"
+                  autoplay muted loop playsinline webkit-playsinline class="reel-video"></video>
+                <div class="reel-label">Drop Test</div>
+              </div>
+            </div>
+            <!-- Reel 3 -->
+            <div class="swiper-slide">
+              <div class="reel-card">
+                <video src="https://cdn.pixabay.com/video/2021/09/15/88686-607824521_large.mp4"
+                  poster="https://images.unsplash.com/photo-1510878933023-e2e2e3942fb0?auto=format&fit=crop&q=80&w=600"
+                  autoplay muted loop playsinline webkit-playsinline class="reel-video"></video>
+                <div class="reel-label">Daily Use Review</div>
+              </div>
+            </div>
+            <!-- Reel 4 -->
+            <div class="swiper-slide">
+              <div class="reel-card">
+                <video src="https://cdn.pixabay.com/video/2021/01/28/63241-505964153_large.mp4"
+                  poster="https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&q=80&w=600"
+                  autoplay muted loop playsinline webkit-playsinline class="reel-video"></video>
+                <div class="reel-label">MagSafe Strength</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reels-explore-container">
+        <a href="#" class="reels-explore-btn">
+          Explore More <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 6. Customer Reviews Section -->
+    <section class="reviews-section animate-on-scroll">
+      <div class="container">
+        <div class="reviews-header">
+          <h2>Customer Reviews</h2>
+          <p>What our community is saying</p>
+        </div>
+
+        <div class="reviews-scroller">
+          <div class="reviews-track">
+            <!-- Review 1 -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Absolutely love the quality! The case feels premium and the protection is top-notch. Highly recommended!"</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Alex Johnson</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Best case I've ever owned. The MagSafe works perfectly and the design is stunning."</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Sarah Williams</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Fast shipping and great packaging. The case fits my phone perfectly."</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Michael Brown</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"I dropped my phone yesterday and not a scratch! This case is a lifesaver."</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>David Lee</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Stylish and protective. I get compliments on it all the time."</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Emily Davis</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+             <!-- Duplicates for infinite scroll -->
+            <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Absolutely love the quality! The case feels premium and the protection is top-notch. Highly recommended!"</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Alex Johnson</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+
+             <div class="review-card">
+              <div class="review-stars">
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+                <i data-lucide="star" fill="#f1c40f" stroke="none"></i>
+              </div>
+              <p class="review-text">"Best case I've ever owned. The MagSafe works perfectly and the design is stunning."</p>
+              <div class="review-author">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" class="review-avatar" alt="User">
+                <div class="review-info">
+                  <h4>Sarah Williams</h4>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Site Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <h2 class="footer-logo">GADGET360</h2>
+            <p>Premium accessories for the modern minimalist.</p>
+          </div>
+          <div class="footer-newsletter-widget">
+            <h4>Stay in the loop</h4>
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email">
+              <button class="btn btn-primary">Join</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Shop</h4>
+            <ul>
+              <li><a href="/shop" data-link>All Products</a></li>
+              <li><a href="/new-arrivals" data-link>New Arrivals</a></li>
+              <li><a href="/best-sellers" data-link>Best Sellers</a></li>
+              <li><a href="/sale" data-link>Sale</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="/help" data-link>Help Center</a></li>
+              <li><a href="/shipping" data-link>Shipping & Delivery</a></li>
+              <li><a href="/returns" data-link>Returns & Refunds</a></li>
+              <li><a href="/warranty" data-link>Warranty</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/about" data-link>About Us</a></li>
+              <li><a href="/careers" data-link>Careers</a></li>
+              <li><a href="/press" data-link>Press</a></li>
+              <li><a href="/contact" data-link>Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Social</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+              <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+              <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 GADGET360. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="/privacy" data-link>Privacy Policy</a>
+            <a href="/terms" data-link>Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

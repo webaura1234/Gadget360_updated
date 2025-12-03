@@ -5,7 +5,7 @@ export function Shop() {
   // For this static version, we'll just render the initial state.
 
   return `
-    <div class="container shop-page">
+    <div class="shop-page">
       <div class="shop-header">
         <h1>SHOP</h1>
         <p>Browse all our latest gadgets and accessories.</p>
@@ -48,12 +48,9 @@ export function Shop() {
             <!-- Populated by JS -->
           </div>
 
-          <div class="pagination">
-            <button class="btn btn-outline prev-btn" disabled>Previous</button>
-            <div class="page-numbers">
-              <!-- Populated by JS -->
-            </div>
-            <button class="btn btn-outline next-btn">Next</button>
+          <div id="scroll-sentinel" style="height: 20px; margin: 20px 0;"></div>
+          <div class="loading-indicator text-center" style="display: none; padding: 20px;">
+            <p>Loading more products...</p>
           </div>
         </main>
       </div>

@@ -12,8 +12,31 @@ export function ProductDetail(id) {
     `;
   }
 
+  // Get 4 random related products (excluding current product)
+  const relatedProducts = products
+    .filter(p => p.id != id)
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 4);
+
+  const relatedProductsHTML = relatedProducts.map(product => `
+    <div class="best-seller-card">
+      <div class="best-seller-badge" style="display: ${product.badge ? 'block' : 'none'}">${product.badge}</div>
+      <a href="/product/${product.id}" data-link style="display: block; width: 100%;">
+        <div class="best-seller-image-wrapper">
+          <img src="${product.image}" alt="${product.name}" class="img-primary">
+          <img src="${product.altImage || product.image}" alt="${product.name} Alternate" class="img-secondary">
+        </div>
+        <div class="best-seller-info">
+          <h3 class="best-seller-title">${product.name}</h3>
+          <p class="best-seller-price">From Rs. ${product.price.toFixed(2)}</p>
+        </div>
+      </a>
+      <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="margin-top: 15px; width: 100%;">Quick Add</button>
+    </div>
+  `).join('');
+
   return `
-    <div class="container product-detail-page">
+    <div class="product-detail-page">
       <div class="product-detail-grid">
         <div class="product-gallery">
           <div class="main-image">
@@ -65,6 +88,13 @@ export function ProductDetail(id) {
               <p>Experience the best quality with ${product.name}. Designed for modern life, it features state-of-the-art technology and premium materials.</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="related-products-section">
+        <h2>You May Also Like</h2>
+        <div class="related-products-grid">
+          ${relatedProductsHTML}
         </div>
       </div>
     </div>

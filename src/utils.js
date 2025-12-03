@@ -1,4 +1,4 @@
-import { createIcons, Menu, ShoppingBag, Search, User, X, Facebook, Instagram, Youtube } from 'lucide';
+import { createIcons, Menu, ShoppingBag, Search, User, X, Facebook, Instagram, Youtube, ArrowRight, Twitter } from 'lucide';
 
 export function initIcons() {
     createIcons({
@@ -10,7 +10,9 @@ export function initIcons() {
             X,
             Facebook,
             Instagram,
-            Youtube
+            Youtube,
+            ArrowRight,
+            Twitter
         }
     });
 }

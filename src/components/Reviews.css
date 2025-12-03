@@ -1,0 +1,174 @@
+/* Unboxing Section Text Fix */
+.reels-header h2 {
+    color: #000;
+}
+
+.reels-header p {
+    color: #666;
+}
+
+.reels-explore-btn {
+    color: #000;
+    border-color: #000;
+}
+
+.reels-explore-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Shop Page Text Fixes */
+.shop-page {
+    color: #000;
+    padding-top: 100px;
+    /* Clear fixed navbar */
+}
+
+.shop-header h1 {
+    color: #000;
+}
+
+.shop-header p {
+    color: #666;
+}
+
+.shop-sidebar h3 {
+    color: #000;
+}
+
+.shop-sidebar label {
+    color: #333;
+}
+
+.shop-controls .showing-text {
+    color: #333;
+}
+
+.shop-controls select {
+    color: #000;
+    border-color: #000;
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 80px 0;
+    background-color: #000;
+    /* Black background */
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Override container for full width */
+.reviews-section .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0;
+    margin: 0;
+}
+
+.reviews-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.reviews-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.reviews-header p {
+    color: #aaa;
+}
+
+.reviews-scroller {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    /* Removed mask-image to be visible entirely */
+}
+
+.reviews-track {
+    display: flex;
+    gap: 30px;
+    animation: scrollLeftToRight 40s linear infinite;
+    /* Left to Right scroll */
+    width: max-content;
+    padding: 20px 0;
+}
+
+.reviews-track:hover {
+    animation-play-state: paused;
+}
+
+.review-card {
+    background: #111;
+    /* Dark card background */
+    border: 1px solid #333;
+    /* Subtle border */
+    border-radius: 16px;
+    padding: 30px;
+    width: 350px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.review-stars {
+    color: #f1c40f;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 2px;
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+    /* Light text */
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #333;
+    object-fit: cover;
+}
+
+.review-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+}
+
+.review-info span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+@keyframes scrollLeftToRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

@@ -12,6 +12,9 @@ import { CartModal, initCartIcons } from './components/CartModal.js';
 import { products } from './data/products.js';
 import Profile from './pages/Profile.js';
 import { handleShopEvents } from './shop_events.js';
+import './components/BestSellers.css';
+import './components/Reviews.css';
+import './components/ProductDetail.css';
 
 // Import Swiper
 import Swiper from 'swiper';
@@ -119,8 +122,31 @@ const initAnimations = () => {
   }
 };
 
-// Initialize Swiper
-const initSwiper = () => {
+// Initialize Hero Swiper
+const initHeroSwiper = () => {
+  const heroSwiperEl = document.querySelector('.hero-swiper');
+  if (heroSwiperEl) {
+    new Swiper(heroSwiperEl, {
+      modules: [Pagination, Autoplay, EffectFade],
+      loop: true,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  }
+};
+
+// Initialize Swiper (renamed from initSwiper to initProductSwiper to avoid confusion with hero swiper)
+const initProductSwiper = () => {
   const swiperEl = document.querySelector('.swiper');
   // Only init main hero swiper if it doesn't have reels-swiper class
   if (swiperEl && !swiperEl.classList.contains('reels-swiper')) {
@@ -237,6 +263,11 @@ const renderCart = () => {
   };
 
   document.getElementById('close-cart').addEventListener('click', close);
+  const backCartBtn = document.getElementById('back-cart');
+  if (backCartBtn) {
+    backCartBtn.addEventListener('click', close);
+  }
+
   modal.addEventListener('click', (e) => {
     if (e.target === modal) close();
   });
@@ -259,12 +290,12 @@ const renderCart = () => {
     }
 
     if (btn.id === 'start-shopping') {
-      close();
+      modal.remove();
       navigateTo('/shop');
     }
 
     if (btn.id === 'checkout-btn') {
-      close();
+      modal.remove();
       navigateTo('/checkout');
     }
   });
@@ -324,7 +355,8 @@ const router = async () => {
   updateCartCount();
 
   // Initialize new UI features
-  initSwiper();
+  initHeroSwiper();
+  initProductSwiper();
   initReelsSwiper();
   initShowcaseSwiper();
   initMaterialCards();
@@ -338,6 +370,14 @@ const router = async () => {
       link.classList.remove('active');
     }
   });
+
+  // Theme Switching for Navbar
+  const header = document.querySelector('.site-header');
+  if (path === '/shop' || path === '/all-products' || path === '/best-sellers' || path.startsWith('/product/')) {
+    header.classList.add('shop-nav');
+  } else {
+    header.classList.remove('shop-nav');
+  }
 };
 
 const navigateTo = url => {
@@ -539,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         cart.addItem(product, quantity, { color });
-        renderCart();
+        // renderCart(); // Removed to prevent auto-opening cart
       }
     }
 
@@ -644,7 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.remove('scrolled');
     }
 
-    // Hide/Show logic
+    // Navbar hiding logic removed to keep it fixed
+    /*
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       // Scrolling down -> Hide
       header.classList.add('nav-hidden');
@@ -652,9 +693,73 @@ document.addEventListener('DOMContentLoaded', () => {
       // Scrolling up -> Show
       header.classList.remove('nav-hidden');
     }
+    */
 
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });
+
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navMenu = document.querySelector('.nav-menu');
+
+  // Create overlay if it doesn't exist
+  let menuOverlay = document.querySelector('.menu-overlay');
+  if (!menuOverlay) {
+    menuOverlay = document.createElement('div');
+    menuOverlay.className = 'menu-overlay';
+    document.body.appendChild(menuOverlay);
+  }
+
+  // Create mobile drawer if it doesn't exist
+  let mobileDrawer = document.querySelector('.mobile-drawer');
+  if (!mobileDrawer && navMenu) {
+    mobileDrawer = document.createElement('div');
+    mobileDrawer.className = 'mobile-drawer';
+
+    // Clone links
+    const links = navMenu.querySelectorAll('.nav-link');
+    links.forEach(link => {
+      const clonedLink = link.cloneNode(true);
+      mobileDrawer.appendChild(clonedLink);
+    });
+
+    document.body.appendChild(mobileDrawer);
+  }
+
+  if (mobileMenuBtn && mobileDrawer) {
+    const toggleMenu = () => {
+      const isActive = mobileDrawer.classList.contains('active');
+
+      if (isActive) {
+        // Close Menu
+        mobileDrawer.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scroll
+
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.setAttribute('data-lucide', 'menu');
+      } else {
+        // Open Menu
+        mobileDrawer.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Lock scroll
+
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.setAttribute('data-lucide', 'x');
+      }
+      initIcons();
+    };
+
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu); // Close on overlay click
+
+    // Close menu when clicking a link
+    mobileDrawer.addEventListener('click', (e) => {
+      if (e.target.matches('.nav-link')) {
+        toggleMenu(); // Use toggle function to ensure cleanup
+      }
+    });
+  }
 
   router();
 });

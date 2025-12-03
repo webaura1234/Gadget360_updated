@@ -1,8 +1,8 @@
 import { cart } from '../cart.js';
-import { createIcons, X, Trash2, Plus, Minus } from 'lucide';
+import { createIcons, X, Trash2, Plus, Minus, ArrowLeft } from 'lucide';
 
 export function CartModal() {
-    const itemsHtml = cart.items.map(item => `
+  const itemsHtml = cart.items.map(item => `
     <div class="cart-item">
       <img src="${item.image}" alt="${item.name}" class="cart-item-img">
       <div class="cart-item-info">
@@ -26,10 +26,13 @@ export function CartModal() {
     </div>
   `).join('');
 
-    return `
+  return `
     <div class="cart-overlay" id="cart-overlay">
       <div class="cart-drawer">
         <div class="cart-header">
+          <button class="btn-back-cart" id="back-cart">
+            <i data-lucide="arrow-left"></i>
+          </button>
           <h2>Your Cart (${cart.count})</h2>
           <button class="btn-close-cart" id="close-cart">
             <i data-lucide="x"></i>
@@ -64,7 +67,7 @@ export function CartModal() {
 }
 
 export function initCartIcons() {
-    createIcons({
-        icons: { X, Trash2, Plus, Minus }
-    });
+  createIcons({
+    icons: { X, Trash2, Plus, Minus, ArrowLeft }
+  });
 }
