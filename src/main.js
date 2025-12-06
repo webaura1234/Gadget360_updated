@@ -581,12 +581,31 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDrawer = document.createElement('div');
     mobileDrawer.className = 'mobile-drawer';
 
-    // Clone links
-    const links = navMenu.querySelectorAll('.nav-link');
-    links.forEach(link => {
-      const clonedLink = link.cloneNode(true);
-      mobileDrawer.appendChild(clonedLink);
+    // Clone all children of nav-menu to capture dropdowns
+    Array.from(navMenu.children).forEach(child => {
+      const clonedChild = child.cloneNode(true);
+      mobileDrawer.appendChild(clonedChild);
+
+      // Add click listener for dropdowns in mobile
+      if (clonedChild.classList.contains('dropdown')) {
+        const toggle = clonedChild.querySelector('.dropdown-toggle');
+        if (toggle) {
+          toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            clonedChild.classList.toggle('active');
+          });
+        }
+      }
     });
+
+    // Add Wishlist Link manually
+    const wishlistLink = document.createElement('a');
+    wishlistLink.href = '/wishlist';
+    wishlistLink.className = 'nav-link';
+    wishlistLink.textContent = 'WISHLIST';
+    wishlistLink.setAttribute('data-link', '');
+    mobileDrawer.appendChild(wishlistLink);
 
     document.body.appendChild(mobileDrawer);
   }

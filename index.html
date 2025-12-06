@@ -46,22 +46,59 @@
           <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="white"
             font-family="'Inter', sans-serif" font-weight="800" font-size="14">G</text>
         </svg>
-        GADGET<span class="text-red">360</span>
+        <span class="logo-text">GADGET<span class="text-red">360</span></span>
       </a>
 
       <nav class="nav-menu">
         <a href="/" class="nav-link" data-link>HOME</a>
         <a href="/shop" class="nav-link" data-link>SHOP</a>
-        <a href="/sale" class="nav-link" data-link>SALE</a>
-        <a href="/help" class="nav-link" data-link>HELP</a>
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle">CATEGORIES</button>
+          <div class="dropdown-menu">
+            <a href="/category/cases" class="dropdown-item" data-link>Cases</a>
+            <a href="/category/chargers" class="dropdown-item" data-link>Chargers</a>
+            <a href="/category/cables" class="dropdown-item" data-link>Cable's</a>
+            <a href="/category/powerbanks" class="dropdown-item" data-link>Powerbanks</a>
+            <a href="/category/gadgets" class="dropdown-item" data-link>Gadget's</a>
+            <a href="/category/diecast" class="dropdown-item" data-link>DieCast</a>
+            <a href="/category/marshall" class="dropdown-item" data-link>Marshall</a>
+            <a href="/category/sony" class="dropdown-item" data-link>Sony</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle">INFO</button>
+          <div class="dropdown-menu">
+            <a href="/about" class="dropdown-item" data-link>ABOUT US</a>
+            <a href="/contact" class="dropdown-item" data-link>CONTACT US</a>
+            <a href="/help" class="dropdown-item" data-link>FAQS</a>
+            <a href="/refund" class="dropdown-item" data-link>RETURN POLICY</a>
+            <a href="/privacy" class="dropdown-item" data-link>PRIVACY POLICY</a>
+            <a href="/terms" class="dropdown-item" data-link>TERMS & CONDITIONS</a>
+          </div>
+        </div>
       </nav>
 
       <div class="header-actions">
-
+        <button class="btn-icon" aria-label="Search">
+          <i data-lucide="search"></i>
+        </button>
+        <button class="btn-icon btn-wishlist" aria-label="Wishlist">
+          <i data-lucide="heart"></i>
+        </button>
         <button class="btn-cart" aria-label="Cart">
           <i data-lucide="shopping-bag"></i>
           <span class="cart-count">0</span>
         </button>
+        <div class="dropdown">
+          <button class="btn-icon dropdown-toggle" aria-label="Profile">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="dropdown-menu dropdown-right">
+            <a href="/orders" class="dropdown-item" data-link>YOUR ORDERS</a>
+            <a href="/addresses" class="dropdown-item" data-link>ADDRESSES</a>
+            <a href="/logout" class="dropdown-item" data-link>SIGNOUT</a>
+          </div>
+        </div>
         <button class="mobile-menu-btn" aria-label="Menu">
           <i data-lucide="menu"></i>
         </button>

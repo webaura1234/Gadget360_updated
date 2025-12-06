@@ -6,32 +6,31 @@ export function Home() {
   return `
     <!-- 1. Spotlight Hero -->
     <!-- 1. Spotlight Hero (Carousel) -->
-    <section class="hero-cinematic" style="padding: 0; height: 80vh; min-height: 600px;">
+    <section class="hero-cinematic" style="padding: 0; height: 80vh; min-height: 600px; margin-bottom: 0; display: flex;">
       <div class="swiper hero-swiper" style="width: 100%; height: 100%;">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_02_v2.jpg?v=1753091030&width=1800" alt="Hero 1" class="hero-slide-image">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_02_v2.jpg?v=1753091030&width=1800" alt="Hero 1" class="hero-slide-image" style="vertical-align: bottom;">
           </div>
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_03.jpg?v=1753091030&width=1800" alt="Hero 2" class="hero-slide-image">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_03.jpg?v=1753091030&width=1800" alt="Hero 2" class="hero-slide-image" style="vertical-align: bottom;">
           </div>
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_01_v2_ef6e1b14-26e9-470e-9da1-0ab0eede4c24.jpg?v=1753101304&width=1800" alt="Hero 3" class="hero-slide-image">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_01_v2_ef6e1b14-26e9-470e-9da1-0ab0eede4c24.jpg?v=1753101304&width=1800" alt="Hero 3" class="hero-slide-image" style="vertical-align: bottom;">
           </div>
         </div>
         <div class="swiper-pagination"></div>
       </div>
     </section>
 
-    <!-- 2. Best Sellers (Updated Design) -->
-    <section class="best-seller-section">
-      <div class="container">
-        <div class="best-seller-header">
-          <!-- Buttons removed as per request -->
+    <!-- New Section: Premium Cases -->
+    <section class="section text-dark" style="background-color: #ffffff; padding-top: 60px; padding-bottom: 60px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;">
+      <div class="container-fluid">
+        <div class="section-header" style="justify-content: center; border-bottom: none; margin-bottom: 40px;">
+          <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; color: #000000; text-transform: uppercase;">PREMIUM CASES</h2>
         </div>
-
         <div class="best-seller-grid">
-          ${bestSellers.slice(0, 4).map(product => `
+          ${products.filter(p => p.category.includes('Case')).slice(0, 4).map(product => `
             <div class="best-seller-card">
               <div class="best-seller-badge">BUY 1 GET 2</div>
               <a href="/product/${product.id}" data-link style="display: block; width: 100%;">
@@ -40,12 +39,11 @@ export function Home() {
                   <img src="${product.altImage || product.image}" alt="${product.name} Alt" class="img-secondary">
                 </div>
                 <div class="best-seller-info">
-                  <h3 class="best-seller-title">${product.name}</h3>
-                  <p class="best-seller-price">From Rs. ${product.price.toFixed(2)}</p>
+                  <h3 class="best-seller-title" style="color: #000; font-weight: 700; letter-spacing: -0.5px;">${product.name}</h3>
+                  <p class="best-seller-price" style="color: #333;">From Rs. ${product.price.toFixed(2)}</p>
                 </div>
               </a>
               
-              <!-- Thumbnails (Placeholder logic: using same image + alt image if available) -->
               <div class="best-seller-thumbnails">
                 <img src="${product.image}" class="best-seller-thumb" alt="Variant 1">
                 <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 2">
@@ -53,13 +51,21 @@ export function Home() {
                 <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 4">
               </div>
 
-              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="margin-top: 15px; width: 100%;">Quick Add</button>
+              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}">Quick Add</button>
             </div>
           `).join('')}
         </div>
+      </div>
+    </section>
 
+    <!-- New Section: Die Cast Cars -->
+    <section class="section text-dark" style="background-color: #ffffff; padding-top: 60px; padding-bottom: 60px; margin-bottom: 0;">
+      <div class="container-fluid">
+        <div class="section-header" style="justify-content: center; border-bottom: none; margin-bottom: 40px;">
+          <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; color: #000000; text-transform: uppercase;">DIE CAST COLLECTION</h2>
+        </div>
         <div class="best-seller-grid">
-          ${bestSellers.slice(4, 8).map(product => `
+          ${products.filter(p => p.category === 'Die Cast').slice(0, 4).map(product => `
             <div class="best-seller-card">
               <div class="best-seller-badge">BUY 1 GET 2</div>
               <a href="/product/${product.id}" data-link style="display: block; width: 100%;">
@@ -68,12 +74,11 @@ export function Home() {
                   <img src="${product.altImage || product.image}" alt="${product.name} Alt" class="img-secondary">
                 </div>
                 <div class="best-seller-info">
-                  <h3 class="best-seller-title">${product.name}</h3>
-                  <p class="best-seller-price">From Rs. ${product.price.toFixed(2)}</p>
+                  <h3 class="best-seller-title" style="color: #000; font-weight: 700; letter-spacing: -0.5px;">${product.name}</h3>
+                  <p class="best-seller-price" style="color: #333;">From Rs. ${product.price.toFixed(2)}</p>
                 </div>
               </a>
-              
-              <!-- Thumbnails (Placeholder logic: using same image + alt image if available) -->
+
               <div class="best-seller-thumbnails">
                 <img src="${product.image}" class="best-seller-thumb" alt="Variant 1">
                 <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 2">
@@ -81,7 +86,7 @@ export function Home() {
                 <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 4">
               </div>
 
-              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="margin-top: 15px; width: 100%;">Quick Add</button>
+              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}">Quick Add</button>
             </div>
           `).join('')}
         </div>
@@ -93,41 +98,6 @@ export function Home() {
     </section>
 
 
-
-    <!-- 4. Materials & Protection -->
-    <section class="materials-section">
-      <div class="container">
-        <h2 class="text-center" style="margin-bottom: 60px; text-transform: uppercase; letter-spacing: 3px; font-weight: 300;">Advanced Materials</h2>
-
-        <div class="materials-grid">
-          
-          <div class="material-card">
-            <div class="material-texture" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
-            <div class="material-content">
-              <h3 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">CarbonShield</h3>
-              <p style="color: #666; font-size: 0.9rem;">Aerospace-grade fiber.</p>
-            </div>
-          </div>
-
-          <div class="material-card">
-            <div class="material-texture" style="background-image: url('https://www.transparenttextures.com/patterns/brushed-alum.png');"></div>
-            <div class="material-content">
-              <h3 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">TitanGuard</h3>
-              <p style="color: #666; font-size: 0.9rem;">Impact resistant alloy.</p>
-            </div>
-          </div>
-
-          <div class="material-card">
-            <div class="material-texture" style="background-image: url('https://www.transparenttextures.com/patterns/leather.png');"></div>
-            <div class="material-content">
-              <h3 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">SoftSilk Grip</h3>
-              <p style="color: #666; font-size: 0.9rem;">Tactile perfection.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
 
     <!-- 5. Reels Review Section -->
     <section class="reels-section animate-on-scroll" style="background-color: #f6f6f6;">

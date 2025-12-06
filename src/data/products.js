@@ -286,5 +286,53 @@ export const products = [
     isNew: true,
     isBestSeller: false,
     description: "Tempered glass back with a beautiful color gradient. Scratch resistant."
+  },
+  {
+    id: 25,
+    name: "Porsche 911 GT3 RS",
+    price: 3500.00,
+    image: "https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&q=80&w=600",
+    category: "Die Cast",
+    rating: 4.9,
+    reviews: 42,
+    isNew: true,
+    isBestSeller: true,
+    description: "1:18 scale model of the legendary Porsche 911 GT3 RS. Intricate details and opening parts."
+  },
+  {
+    id: 26,
+    name: "Lamborghini Aventador",
+    price: 3800.00,
+    image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=600",
+    category: "Die Cast",
+    rating: 4.8,
+    reviews: 35,
+    isNew: true,
+    isBestSeller: false,
+    description: "Detailed 1:24 scale replica of the Lamborghini Aventador. Matte black finish."
+  },
+  {
+    id: 27,
+    name: "Ford Mustang 1967",
+    price: 2900.00,
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600",
+    category: "Die Cast",
+    rating: 4.7,
+    reviews: 58,
+    isNew: false,
+    isBestSeller: true,
+    description: "Classic 1967 Ford Mustang GT Fastback. 1:18 scale with authentic interior."
+  },
+  {
+    id: 28,
+    name: "Nissan GT-R R35",
+    price: 3200.00,
+    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=600",
+    category: "Die Cast",
+    rating: 4.9,
+    reviews: 64,
+    isNew: false,
+    isBestSeller: true,
+    description: "The Godzilla of supercars. 1:18 scale Nissan GT-R R35 with working suspension."
   }
 ];
