@@ -10,7 +10,7 @@ import { initIcons } from './utils.js';
 import { cart } from './cart.js';
 import { CartModal, initCartIcons } from './components/CartModal.js';
 import { products } from './data/products.js';
-import Profile from './pages/Profile.js';
+
 import { handleShopEvents } from './shop_events.js';
 import './components/BestSellers.css';
 import './components/Reviews.css';
@@ -50,7 +50,7 @@ const routes = {
   '/accessibility': () => Legal('accessibility'),
   '/checkout': Checkout,
   '/order-success': OrderSuccess,
-  '/profile': Profile,
+
 };
 
 // Animation Observer & Advanced Animations
@@ -314,18 +314,9 @@ const updateCartCount = () => {
 
 cart.subscribe(updateCartCount);
 
-// Profile & Checkout Event Delegation
-const handleGlobalEvents = () => {
-  // We only need to set this up once, but since router calls this on every page load,
-  // we should ensure we don't duplicate listeners.
-  // However, the current architecture calls init functions on every route.
-  // A better approach for this codebase is to use the existing global click listener in DOMContentLoaded
-  // and add our logic there.
-};
 
-// We will move the logic to the global listener at the bottom of the file
-// and remove these specific handler functions to avoid confusion/duplication.
-// But to keep the structure similar, we can leave empty functions or remove calls.
+
+
 
 
 const router = async () => {
@@ -437,105 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Profile: View Order Details
-    const viewOrderBtn = e.target.closest('.btn-view-order');
-    if (viewOrderBtn) {
-      const orderId = viewOrderBtn.dataset.id;
-      const orderModal = document.getElementById('order-modal');
-      const orderModalBody = document.getElementById('order-modal-body');
 
-      if (orderModal && orderModalBody) {
-        // Mock data
-        const orderDetails = {
-          id: orderId,
-          date: 'Nov 28, 2025',
-          status: 'Delivered',
-          items: [
-            { name: 'Crystal Clear MagSafe Case', price: 1200, qty: 1, image: 'https://images.unsplash.com/photo-1592434134753-a70baf7979d5?auto=format&fit=crop&q=80&w=100' }
-          ],
-          total: 1200
-        };
-
-        orderModalBody.innerHTML = `
-          <h2 style="margin-bottom: 20px;">Order Details</h2>
-          <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #333;">
-            <p><strong>Order ID:</strong> #${orderDetails.id}</p>
-            <p><strong>Date:</strong> ${orderDetails.date}</p>
-            <p><strong>Status:</strong> <span class="status status-delivered">${orderDetails.status}</span></p>
-          </div>
-          <div style="margin-bottom: 20px;">
-            ${orderDetails.items.map(item => `
-              <div class="flex items-center gap-md" style="margin-bottom: 15px;">
-                <img src="${item.image}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-                <div>
-                  <h4>${item.name}</h4>
-                  <p class="text-muted">Qty: ${item.qty} x ₹${item.price}</p>
-                </div>
-                <div style="margin-left: auto;">₹${item.price * item.qty}</div>
-              </div>
-            `).join('')}
-          </div>
-          <div style="border-top: 1px solid #333; padding-top: 20px; text-align: right;">
-            <h3>Total: ₹${orderDetails.total.toFixed(2)}</h3>
-          </div>
-        `;
-        orderModal.style.display = 'flex';
-      }
-    }
-
-    // Profile: Close Modal
-    if (e.target.closest('#close-order-modal') || e.target.id === 'order-modal') {
-      const orderModal = document.getElementById('order-modal');
-      if (orderModal) orderModal.style.display = 'none';
-    }
-
-    // Profile: Add New Address
-    if (e.target.closest('#btn-add-address')) {
-      const addressFormContainer = document.getElementById('address-form-container');
-      const addressForm = document.getElementById('address-form');
-      if (addressFormContainer && addressForm) {
-        addressFormContainer.style.display = 'block';
-        document.getElementById('address-form-title').textContent = 'Add New Address';
-        addressForm.reset();
-        addressFormContainer.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    // Profile: Cancel Address
-    if (e.target.closest('#btn-cancel-address')) {
-      const addressFormContainer = document.getElementById('address-form-container');
-      if (addressFormContainer) addressFormContainer.style.display = 'none';
-    }
-
-    // Profile: Delete Address
-    if (e.target.closest('.btn-delete-address')) {
-      if (confirm('Are you sure you want to delete this address?')) {
-        e.target.closest('.address-card').remove();
-      }
-    }
-
-    // Profile: Edit Address
-    if (e.target.closest('.btn-edit-address')) {
-      const addressFormContainer = document.getElementById('address-form-container');
-      if (addressFormContainer) {
-        addressFormContainer.style.display = 'block';
-        document.getElementById('address-form-title').textContent = 'Edit Address';
-        addressFormContainer.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    // Profile: Tabs
-    const profileTab = e.target.closest('.profile-tab');
-    if (profileTab) {
-      const target = profileTab.dataset.tab;
-      if (target) {
-        document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-        profileTab.classList.add('active');
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        const pane = document.getElementById(target);
-        if (pane) pane.classList.add('active');
-      }
-    }
 
     // Product Detail: Thumbnails
     const thumb = e.target.closest('.thumbnail-list img');
@@ -642,33 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1500);
     }
 
-    // Profile: Save Address
-    if (e.target.id === 'address-form') {
-      e.preventDefault();
-      const addressList = document.getElementById('address-list');
-      const btnAddAddress = document.getElementById('btn-add-address');
-      const addressFormContainer = document.getElementById('address-form-container');
 
-      if (addressList && btnAddAddress) {
-        const newCard = document.createElement('div');
-        newCard.className = 'address-card';
-        newCard.innerHTML = `
-                <div class="address-header">
-                    <strong>${e.target.querySelector('input[placeholder="Home"]').value || 'New Address'}</strong>
-                </div>
-                <p>${e.target.querySelector('input[placeholder="John Doe"]').value}</p>
-                <p>${e.target.querySelector('input[placeholder="123 Street Name"]').value}</p>
-                <p>${e.target.querySelector('input[placeholder="City"]').value}, ${e.target.querySelector('input[placeholder="ZIP Code"]').value}</p>
-                <p>${e.target.querySelector('select').value}</p>
-                <div class="address-actions">
-                    <button class="btn btn-sm btn-link btn-edit-address">Edit</button>
-                    <button class="btn btn-sm btn-link text-danger btn-delete-address">Delete</button>
-                </div>
-            `;
-        addressList.insertBefore(newCard, btnAddAddress);
-        if (addressFormContainer) addressFormContainer.style.display = 'none';
-      }
-    }
   });
 
   const header = document.querySelector('.site-header');
@@ -684,8 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.remove('scrolled');
     }
 
-    // Navbar hiding logic removed to keep it fixed
-    /*
+
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       // Scrolling down -> Hide
       header.classList.add('nav-hidden');
@@ -693,7 +559,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Scrolling up -> Show
       header.classList.remove('nav-hidden');
     }
-    */
 
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });

@@ -447,13 +447,120 @@ button {
     color: var(--color-text-main);
 }
 
-/* Footer */
+/* Big Typography Footer */
 .site-footer {
-    background-color: var(--color-bg-card);
-    color: #fff;
-    padding: 80px 0 40px;
+    background-color: #000;
+    color: #f4f4f0;
+    /* Off-white */
+    padding: 0;
     margin-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-border);
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    /* Full screen feel */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-big-text {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 0;
+    pointer-events: none;
+    line-height: 0.8;
+}
+
+.big-text-line {
+    font-size: 15vw;
+    /* Massive text */
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #f4f4f0;
+    letter-spacing: -1vw;
+    font-family: 'Inter', sans-serif;
+    /* Or a custom display font if available */
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: auto;
+    /* Push to top or center depending on layout preference */
+    padding-top: 100px;
+    /* Space from top */
+}
+
+.footer-col h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    color: #f4f4f0;
+    letter-spacing: 1px;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col a {
+    color: #f4f4f0;
+    font-size: 16px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.footer-col a:hover {
+    opacity: 0.7;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 40px;
+    border-top: none;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .big-text-line {
+        font-size: 25vw;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+        padding-top: 40px;
+    }
+
+    .footer-content {
+        padding: 40px 20px;
+    }
 }
 
 .footer-top {
@@ -3673,4 +3780,18 @@ button {
 .hero-swiper .swiper-pagination-bullet-active {
     opacity: 1;
     background: #fff;
+}
+
+/* Page Layout Fixes for Fixed Navbar */
+.shop-page,
+.help-page,
+.sale-page,
+.profile-page,
+.checkout-page,
+.legal-page,
+.order-success-page {
+    padding-top: 120px;
+    /* 45px (Announce) + ~75px (Header) */
+    min-height: 100vh;
+    /* Ensure full height */
 }
