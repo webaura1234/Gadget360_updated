@@ -10,6 +10,7 @@ import { initIcons } from './utils.js';
 import { cart } from './cart.js';
 import { CartModal, initCartIcons } from './components/CartModal.js';
 import { products } from './data/products.js';
+import { Profile } from './pages/UserProfile.js';
 
 import { handleShopEvents } from './shop_events.js';
 import './components/BestSellers.css';
@@ -50,7 +51,7 @@ const routes = {
   '/accessibility': () => Legal('accessibility'),
   '/checkout': Checkout,
   '/order-success': OrderSuccess,
-
+  '/profile': Profile,
 };
 
 // Animation Observer & Advanced Animations
@@ -473,6 +474,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cart.addItem(product, quantity, { color });
         // renderCart(); // Removed to prevent auto-opening cart
+      }
+    }
+
+    // Profile Page: Add Address Modal Handling
+    const modal = document.getElementById('up-address-modal');
+    if (modal) {
+      // Open Modal
+      if (e.target.closest('#btn-add-address-empty') || e.target.closest('#btn-add-address-list')) {
+        modal.classList.add('open');
+      }
+
+      // Close Modal
+      if (e.target.closest('#btn-close-modal') || e.target.closest('#btn-cancel-modal') || e.target === modal) {
+        modal.classList.remove('open');
+        // Optional: clear errors
+        document.querySelectorAll('.up-input').forEach(i => i.classList.remove('error'));
+        document.querySelectorAll('.up-error-msg').forEach(msg => msg.style.display = 'none');
+      }
+
+      // Save Address logic
+      if (e.target.closest('#btn-save-address')) {
+        const fullname = document.getElementById('addr-fullname');
+        const phone = document.getElementById('addr-phone');
+        const line1 = document.getElementById('addr-line1');
+        const line2 = document.getElementById('addr-line2');
+        const city = document.getElementById('addr-city');
+        const state = document.getElementById('addr-state');
+        const pincode = document.getElementById('addr-pincode');
+        const isDefault = document.getElementById('addr-default').checked;
+
+        let isValid = true;
+
+        // Helper to validate
+        const validateField = (input, condition) => {
+          const errorMsg = input.nextElementSibling; // Assuming structure
+          if (!condition) {
+            input.classList.add('error');
+            if (errorMsg && errorMsg.classList.contains('up-error-msg')) errorMsg.style.display = 'block';
+            isValid = false;
+          } else {
+            input.classList.remove('error');
+            if (errorMsg && errorMsg.classList.contains('up-error-msg')) errorMsg.style.display = 'none';
+          }
+        };
+
+        validateField(fullname, fullname.value.trim() !== '');
+        validateField(phone, /^\d{10}$/.test(phone.value.trim()));
+        validateField(line1, line1.value.trim() !== '');
+        validateField(city, city.value.trim() !== '');
+        validateField(state, state.value !== '');
+        validateField(pincode, /^\d{6}$/.test(pincode.value.trim()));
+
+        if (isValid) {
+          // Create Address Card
+          const addressHTML = `
+                    <div class="up-address-card">
+                        <div class="up-address-name">
+                            ${fullname.value} 
+                            ${isDefault ? '<span class="up-tag-default">Default</span>' : ''}
+                        </div>
+                        <div class="up-address-details">
+                            ${line1.value}, ${line2.value ? line2.value + ', ' : ''}<br>
+                            ${city.value}, ${state.value} - ${pincode.value}
+                        </div>
+                        <div class="up-address-phone">
+                            Phone: ${phone.value}
+                        </div>
+                    </div>
+                 `;
+
+          // Inject
+          const listView = document.getElementById('address-list-view');
+          const emptyView = document.getElementById('address-empty-view');
+          const addAnotherBtn = document.getElementById('btn-add-address-list');
+
+          // Insert before the 'Add another' buttons
+          addAnotherBtn.insertAdjacentHTML('beforebegin', addressHTML);
+
+          // Toggle Views
+          emptyView.style.display = 'none';
+          listView.style.display = 'block';
+
+          // Close Modal
+          modal.classList.remove('open');
+
+          // Clear Form
+          fullname.value = '';
+          phone.value = '';
+          line1.value = '';
+          line2.value = '';
+          city.value = '';
+          state.value = '';
+          pincode.value = '';
+          document.getElementById('addr-default').checked = false;
+        }
       }
     }
 

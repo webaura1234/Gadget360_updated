@@ -280,9 +280,7 @@ button {
     /* Taller hero section */
 }
 
-.site-header.scrolled {
-    /* No top change needed for full width */
-}
+
 
 .site-header.nav-hidden {
     transform: translateY(-100%);
