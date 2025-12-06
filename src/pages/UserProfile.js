@@ -393,7 +393,7 @@ export function Profile() {
       </style>
 
       <!-- Radio Controllers -->
-      <input type="radio" name="up-tab-control" id="up-tab-orders" checked />
+      <input type="radio" name="up-tab-control" id="up-tab-orders" />
       <input type="radio" name="up-tab-control" id="up-tab-addresses" />
 
       <div class="up-container">
