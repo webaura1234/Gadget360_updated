@@ -6,17 +6,17 @@ export function Home() {
   return `
     <!-- 1. Spotlight Hero -->
     <!-- 1. Spotlight Hero (Carousel) -->
-    <section class="hero-cinematic" style="padding: 0; height: 80vh; min-height: 600px; margin-bottom: 0; display: flex;">
-      <div class="swiper hero-swiper" style="width: 100%; height: 100%;">
+    <section class="hero-cinematic" style="padding: 0; margin-bottom: 0; display: block;">
+      <div class="swiper hero-swiper" style="width: 100%;">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_02_v2.jpg?v=1753091030&width=1800" alt="Hero 1" class="hero-slide-image" style="vertical-align: bottom;">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_02_v2.jpg?v=1753091030&width=1800" alt="Hero 1" class="hero-slide-image" style="width: 100%; height: auto; display: block;">
           </div>
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_03.jpg?v=1753091030&width=1800" alt="Hero 2" class="hero-slide-image" style="vertical-align: bottom;">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_03.jpg?v=1753091030&width=1800" alt="Hero 2" class="hero-slide-image" style="width: 100%; height: auto; display: block;">
           </div>
           <div class="swiper-slide">
-            <img src="https://thecasefactory.in/cdn/shop/files/banner_01_v2_ef6e1b14-26e9-470e-9da1-0ab0eede4c24.jpg?v=1753101304&width=1800" alt="Hero 3" class="hero-slide-image" style="vertical-align: bottom;">
+            <img src="https://thecasefactory.in/cdn/shop/files/banner_01_v2_ef6e1b14-26e9-470e-9da1-0ab0eede4c24.jpg?v=1753101304&width=1800" alt="Hero 3" class="hero-slide-image" style="width: 100%; height: auto; display: block;">
           </div>
         </div>
         <div class="swiper-pagination"></div>
@@ -24,7 +24,7 @@ export function Home() {
     </section>
 
     <!-- New Section: Premium Cases -->
-    <section class="section text-dark" style="background-color: #ffffff; padding-top: 60px; padding-bottom: 60px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;">
+    <section class="section text-dark" style="background-color: #ffffff; padding-top: 20px; padding-bottom: 60px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;">
       <div class="container-fluid">
         <div class="section-header" style="justify-content: center; border-bottom: none; margin-bottom: 40px;">
           <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; color: #000000; text-transform: uppercase;">PREMIUM CASES</h2>

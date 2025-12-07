@@ -334,6 +334,17 @@ const router = async () => {
   if (page) {
     app.innerHTML = await page();
     window.scrollTo(0, 0);
+
+    // Handle profile page tab switching via hash
+    if (path === '/profile') {
+      const hash = window.location.hash.slice(1); // Remove the #
+      const tabRadio = hash === 'addresses'
+        ? document.getElementById('up-tab-addresses')
+        : document.getElementById('up-tab-orders'); // Default to orders
+      if (tabRadio) {
+        tabRadio.checked = true;
+      }
+    }
   } else {
     app.innerHTML = `
       <div class="container text-center" style="padding: 100px 0;">
@@ -640,12 +651,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
 
-    // Glass effect logic
-    if (scrollTop > 10) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
 
 
     if (scrollTop > lastScrollTop && scrollTop > 100) {
@@ -742,4 +747,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   router();
+
+  // Handle hash changes for profile page tab switching
+  window.addEventListener('hashchange', () => {
+    if (window.location.pathname === '/profile') {
+      const hash = window.location.hash.slice(1);
+      const tabRadio = hash === 'addresses'
+        ? document.getElementById('up-tab-addresses')
+        : document.getElementById('up-tab-orders');
+      if (tabRadio) {
+        tabRadio.checked = true;
+      }
+    }
+  });
+
+  // Update URL hash when profile tabs are clicked
+  document.body.addEventListener('change', (e) => {
+    if (e.target.name === 'up-tab-control' && window.location.pathname === '/profile') {
+      const tabId = e.target.id;
+      if (tabId === 'up-tab-orders') {
+        window.location.hash = 'orders';
+      } else if (tabId === 'up-tab-addresses') {
+        window.location.hash = 'addresses';
+      }
+    }
+  });
 });

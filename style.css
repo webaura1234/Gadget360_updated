@@ -274,32 +274,50 @@ button {
     display: block;
 }
 
-@media (max-width: 768px) {
-    .logo-text {
-        display: none;
-    }
+/* Logo text kept visible as per user request */
+@media (max-width: 400px) {
+    /* .logo-text { display: none; } */
 }
 
-/* Add margin to hero to prevent overlap */
+/* Add margin to hero to prevent overlap with opaque header */
 .hero-cinematic {
-    margin-top: 45px;
-    height: 95vh;
+    margin-top: 120px;
+    height: auto;
     /* Default for desktop */
-    min-height: 600px;
+    min-height: unset;
 }
 
 @media (max-width: 768px) {
     .hero-cinematic {
         height: auto;
-        min-height: 80vh;
+        min-height: unset;
+        margin-top: 120px;
         /* Adjust for mobile */
     }
 }
 
-
-.site-header.scrolled {
-    /* No top change needed for full width */
+.hero-slide-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
 }
+
+.hero-swiper {
+    width: 100%;
+    height: auto;
+}
+
+.hero-swiper .swiper-slide {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: block;
+    /* Remove flex centering which might interact weirdly with auto height */
+    height: auto;
+}
+
+
+
 
 .site-header.nav-hidden {
     transform: translateY(-100%);
@@ -309,10 +327,10 @@ button {
 .header-inner {
     width: 100%;
     max-width: 100%;
-    background: rgba(0, 0, 0, 0.01);
-    /* Very subtle initially */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: #000000;
+    /* Opaque Black */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 20px 50px;
     border-radius: 0;
@@ -325,16 +343,7 @@ button {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.site-header.scrolled .header-inner {
-    background: rgba(5, 5, 5, 0.85);
-    /* Deep dark glass on scroll */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 15px 50px;
-    /* Compact on scroll */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
+/* Scrolled header styles removed */
 
 .logo {
     font-size: 1.2rem;
@@ -468,6 +477,7 @@ button {
 }
 
 /* Mobile Responsiveness for Header */
+/* Mobile Responsiveness for Header */
 @media (max-width: 1024px) {
     .nav-menu {
         display: none !important;
@@ -479,21 +489,101 @@ button {
 
     .btn-wishlist {
         display: none !important;
-        /* Hide wishlist icon on mobile */
     }
 
+    /* Tablet/Mobile Base */
     .header-inner {
         grid-template-columns: auto 1fr auto;
+        /* Keep grid for tablet 768-1024 */
         padding: 15px 20px;
-        gap: 20px;
+        gap: 10px;
     }
 
     .logo {
         justify-self: start;
     }
+}
 
+/* Mobile specific layout (<768px) requested by user */
+@media (max-width: 768px) {
+    .site-header {
+        background: #000;
+    }
+
+    .site-header .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 12px 15px;
+        width: 100% !important;
+        max-width: none !important;
+        height: auto;
+    }
+
+    /* Center Logo Absolutely */
+    .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+        width: auto;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .logo-text {
+        display: block !important;
+        font-size: 1.1rem;
+    }
+
+    /* Expand Actions to full width to distribute items */
     .header-actions {
-        gap: 15px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    /* Reorder Items: [Menu] [Search] ... [Profile] [Cart] */
+
+    /* 1. Menu Button (Far Left) */
+    .mobile-menu-btn {
+        order: 1;
+        margin-right: 10px;
+        display: flex !important;
+    }
+
+    /* 2. Search Button (Left, next to menu) */
+    .header-actions .btn-icon[aria-label="Search"] {
+        order: 2;
+    }
+
+    /* 3. Auto spacer handled by margin-left: auto on Profile */
+
+    /* 4. Profile (Right side start) */
+    .header-actions .profile-dropdown {
+        order: 3;
+        margin-left: auto;
+        margin-right: 10px;
+        display: flex !important;
+        align-items: center;
+    }
+
+    /* Force visibility of icon */
+    .header-actions .profile-dropdown .btn-icon {
+        display: flex !important;
+        align-items: center;
+        color: #fff !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* 5. Cart (Far Right) */
+    .header-actions .btn-cart {
+        order: 4;
     }
 }
 
@@ -3233,12 +3323,9 @@ button {
 
 /* 1. Spotlight Hero */
 .hero-cinematic {
-    height: 100vh;
+    height: auto;
     background-color: #000;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 }
 
