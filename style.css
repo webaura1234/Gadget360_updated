@@ -403,6 +403,24 @@ button {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Info Pages Navbar (Dark Background for white pages) */
+.site-header.info-nav .header-inner {
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.site-header.info-nav.scrolled .header-inner {
+    background: rgba(0, 0, 0, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Ensure info-nav overrides default transparent background */
+.site-header.info-nav .header-inner {
+    background: rgba(0, 0, 0, 0.95) !important;
+}
+
 .btn-login {
     display: flex;
     align-items: center;
@@ -1349,9 +1367,12 @@ button {
 
 /* Shop Page Styles */
 .shop-page {
-    padding-top: var(--spacing-lg);
+    padding-top: 180px;
+    /* Increased to definitely clear header */
     padding-bottom: var(--spacing-xl);
     background-color: #f6f6f6;
+    color: #000000;
+    /* Ensure text is visible on light background */
     padding-left: 20px;
     padding-right: 20px;
     max-width: 100%;
@@ -1364,29 +1385,263 @@ button {
 
 .shop-layout {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 1fr;
     gap: var(--spacing-xl);
 }
 
-.shop-sidebar {
-    border-right: 1px solid var(--color-border);
-    padding-right: var(--spacing-lg);
-}
-
-.filter-group {
-    margin-bottom: var(--spacing-lg);
-}
-
-.filter-group h3 {
-    font-size: var(--font-size-base);
-    margin-bottom: var(--spacing-md);
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: var(--spacing-sm);
+/* Filter Button & Card */
+.btn-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: var(--font-size-sm);
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-card {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 15px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 320px;
+    display: none;
+    border: 1px solid #f0f0f0;
+}
+
+.filter-card.active {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-item {
+    margin-bottom: 20px;
+}
+
+.filter-item:last-child {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.price-slider.compact {
+    width: 100%;
+    height: 4px;
+}
+
+/* Dual Range Slider Container */
+.dual-range-container {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    margin: 15px 0;
+    --min-percent: 0%;
+    --max-percent: 100%;
+}
+
+.dual-range-container .price-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dual-range-container .price-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    border: none;
+}
+
+.dual-range-container .price-slider::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    border: none;
+}
+
+.dual-range-container .price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    z-index: 3;
+    transition: transform 0.2s;
+    margin-top: -7px;
+}
+
+.dual-range-container .price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.dual-range-container .price-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+    position: relative;
+    z-index: 3;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.dual-range-container .price-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Track styling - background track */
+.dual-range-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+/* Active range track (between the two thumbs) */
+.dual-range-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--min-percent);
+    width: calc(var(--max-percent) - var(--min-percent));
+    height: 4px;
+    background: #000;
+    border-radius: 2px;
+    z-index: 2;
+    pointer-events: none;
+    transition: left 0.1s, width 0.1s;
+}
+
+/* Ensure max slider thumb is above min slider thumb when overlapping */
+.dual-range-container .price-slider-max {
+    z-index: 4;
+}
+
+.dual-range-container .price-slider-max::-webkit-slider-thumb {
+    z-index: 4;
+}
+
+.dual-range-container .price-slider-max::-moz-range-thumb {
+    z-index: 4;
+}
+
+/* Color Swatches */
+.color-swatches {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.color-swatches input[type="radio"] {
+    display: none;
+}
+
+.color-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.color-swatch.all {
+    background: linear-gradient(45deg, #333 50%, #eee 50%);
+}
+
+.color-swatches input[type="radio"]:checked+.color-swatch {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #000;
+    /* Selected ring */
+    border-color: transparent;
+}
+
+/* Price Slider */
+.price-slider-container {
+    padding: 0 5px;
+}
+
+.price-slider {
+    width: 100%;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
 }
 
 .shop-controls {
@@ -2004,10 +2259,9 @@ button {
 /* Section Enhancements */
 .section-header h2 {
     font-size: 2.5rem;
-    background: linear-gradient(45deg, #ffffff, #999);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff;
+    /* Default to white if not overridden */
+    text-transform: uppercase;
 }
 
 /* Responsive Adjustments */
@@ -4235,3 +4489,451 @@ button {
     -webkit-text-fill-color: #000000;
     color: #000000;
 }
+
+/* Reels Section Light Theme */
+.reels-section {
+    background-color: #ffffff !important;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.reels-header h2 {
+    color: #000000 !important;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.reels-header p {
+    color: #666666 !important;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+/* Reviews Section Dark Theme (Alternating) */
+.reviews-section {
+    background-color: #000000 !important;
+    color: #ffffff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.reviews-header h2 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.reviews-header p {
+    color: #bbbbbb;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.review-card {
+    background-color: #111111;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    min-width: 300px;
+    border: 1px solid #333;
+}
+
+.review-text {
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-author h4 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.review-author span {
+    color: #888888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+/* Category Section Styles */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: transparent;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f0f0f0;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    /* Slight radius to match clean aesthetic */
+}
+
+.category-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.img-primary {
+    display: block;
+}
+
+.img-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.category-card:hover .img-secondary {
+    opacity: 1;
+}
+
+.category-card:hover .category-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.category-info {
+    text-align: center;
+    padding: 0;
+    border: none;
+}
+
+.category-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 5px 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+.category-action {
+    transition: color 0.2s;
+}
+
+.category-card:hover .category-action {
+    color: #000 !important;
+}
+
+@media (min-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* Force 4 per row on desktop for consistency with 8 total */
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 per row on mobile */
+        gap: 15px;
+    }
+}
+
+/* ============================================
+   INFO PAGES - PREMIUM CONSISTENT DESIGN
+   ============================================ */
+
+/* Info Page Container - Centered Layout with White Background */
+.info-page {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 80px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.info-page-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Info Page Header */
+.info-page-header {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info-page-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+    color: #000000;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.info-page-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 400;
+    color: #666666;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Info Page Content */
+.info-page-content {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Info Sections - Consistent Design with White Background */
+.info-section {
+    margin-bottom: 50px;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+}
+
+.info-section h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #000000;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+}
+
+.info-section p {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+    color: #666666;
+    margin-bottom: 15px;
+    letter-spacing: 0.1px;
+}
+
+.info-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Links in Info Sections */
+.info-link {
+    color: #000000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
+}
+
+.info-link:hover {
+    color: #333333;
+    border-bottom-color: #333333;
+}
+
+/* Legal Content Specific Styles */
+.info-page-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.info-page-content ul li {
+    margin-bottom: 15px;
+    padding-left: 0;
+}
+
+.info-page-content ul li a {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #666666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+}
+
+.info-page-content ul li a:hover {
+    color: #000000;
+    border-bottom-color: #000000;
+    transform: translateX(5px);
+}
+
+/* FAQ Section Styles */
+.faq-section {
+    margin-top: 20px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.faq-question {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 15px;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    padding-right: 30px;
+    transition: color 0.3s ease;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #666666;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-item[open] .faq-question::after {
+    content: '−';
+    transform: rotate(0deg);
+}
+
+.faq-question:hover {
+    color: #333333;
+}
+
+.faq-question:hover::after {
+    color: #000000;
+}
+
+.faq-answer {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+    color: #666666;
+    padding: 15px 0 0 0;
+    margin: 0;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design for Info Pages */
+@media (max-width: 768px) {
+    .info-page {
+        padding: 100px 15px 60px;
+        background-color: #ffffff;
+    }
+
+    .info-page-header {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .info-section {
+        margin-bottom: 30px;
+        padding: 30px 20px;
+    }
+
+    .info-page-content {
+        text-align: left;
+    }
+
+    .faq-item {
+        padding: 20px;
+    }
+}
+
+/* If Kullas font is available as custom font, uncomment and use:
+@font-face {
+    font-family: 'Kullas';
+    src: url('/fonts/Kullas-Regular.woff2') format('woff2'),
+         url('/fonts/Kullas-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+Then replace 'Playfair Display' with 'Kullas' in the font-family declarations above.
+*/
