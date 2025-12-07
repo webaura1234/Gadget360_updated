@@ -4,6 +4,8 @@ import { ProductDetail } from './pages/ProductDetail.js';
 import { Sale } from './pages/Sale.js';
 import { Help } from './pages/Help.js';
 import { Legal } from './pages/Legal.js';
+import { About } from './pages/About.js';
+import { Contact } from './pages/Contact.js';
 import { Checkout } from './pages/Checkout.js';
 import { OrderSuccess } from './pages/OrderSuccess.js';
 import { initIcons } from './utils.js';
@@ -30,6 +32,8 @@ const routes = {
   '/shop': Shop,
   '/sale': Sale,
   '/help': Help,
+  '/about': About,
+  '/contact': Contact,
   '/login': () => `
     <div class="container" style="max-width: 400px; padding: 100px 0;">
       <h1 class="text-center" style="margin-bottom: 30px;">Log In</h1>
@@ -331,6 +335,11 @@ const router = async () => {
     page = () => ProductDetail(id);
   }
 
+  if (!page && path.startsWith('/category/')) {
+    const categoryName = decodeURIComponent(path.split('/')[2]);
+    page = () => Shop(categoryName);
+  }
+
   if (page) {
     app.innerHTML = await page();
     window.scrollTo(0, 0);
@@ -376,10 +385,20 @@ const router = async () => {
 
   // Theme Switching for Navbar
   const header = document.querySelector('.site-header');
-  if (path === '/shop' || path === '/all-products' || path === '/best-sellers' || path.startsWith('/product/')) {
+  // Add shop-nav class for pages that need dark navbar (shop, product pages)
+  // Remove for info pages and other pages that need transparent/dark navbar
+  if (path === '/shop' || path === '/all-products' || path === '/best-sellers' || path.startsWith('/product/') || path.startsWith('/category/')) {
     header.classList.add('shop-nav');
   } else {
     header.classList.remove('shop-nav');
+  }
+  
+  // Ensure header stays dark on info pages (white background pages)
+  const infoPages = ['/help', '/about', '/contact', '/terms', '/privacy', '/shipping', '/refund', '/accessibility', '/legal'];
+  if (infoPages.includes(path)) {
+    header.classList.add('info-nav');
+  } else {
+    header.classList.remove('info-nav');
   }
 };
 

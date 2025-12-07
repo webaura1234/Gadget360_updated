@@ -23,6 +23,46 @@ export function Home() {
       </div>
     </section>
 
+    <!-- New Section: Shop by Category -->
+    <section class="category-section section text-dark" style="background-color: #f6f6f6; padding-top: 40px; padding-bottom: 40px;">
+      <div class="container-fluid">
+        <div class="section-header" style="justify-content: center; margin-bottom: 30px;">
+          <h2 style="font-size: 2rem; font-weight: 700; text-transform: uppercase; color: #333;">Shop by Category</h2>
+        </div>
+        
+        <div class="category-grid">
+          ${(() => {
+      const NAV_CATEGORIES = [
+        { id: 'cases', label: 'Cases', imageCategory: 'Cases' },
+        { id: 'chargers', label: 'Chargers', imageCategory: 'Chargers' },
+        { id: 'cables', label: "Cable's", imageCategory: 'Cables' },
+        { id: 'powerbanks', label: 'Powerbanks', imageCategory: 'Powerbanks' },
+        { id: 'gadgets', label: "Gadget's", imageCategory: 'Gadgets' },
+        { id: 'diecast', label: 'DieCast', imageCategory: 'DieCast' },
+        { id: 'marshall', label: 'Marshall', imageCategory: 'Marshall' },
+        { id: 'sony', label: 'Sony', imageCategory: 'Sony' }
+      ];
+
+      return NAV_CATEGORIES.map(cat => {
+        const product = products.find(p => p.category === cat.imageCategory) || products[0];
+        return `
+                <a href="/category/${cat.id}" class="category-card" data-link>
+                  <div class="category-image-wrapper">
+                    <img src="${product.image}" alt="${cat.label}" class="img-primary">
+                    <img src="${product.image}" alt="${cat.label}" class="img-secondary">
+                  </div>
+                  <div class="category-info">
+                    <h3 class="category-title">${cat.label}</h3>
+                    <p class="category-action" style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 5px;">View Collection</p>
+                  </div>
+                </a>
+              `;
+      }).join('');
+    })()}
+        </div>
+      </div>
+    </section>
+
     <!-- New Section: Premium Cases -->
     <section class="section text-dark" style="background-color: #ffffff; padding-top: 20px; padding-bottom: 60px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;">
       <div class="container-fluid">
@@ -59,10 +99,10 @@ export function Home() {
     </section>
 
     <!-- New Section: Die Cast Cars -->
-    <section class="section text-dark" style="background-color: #ffffff; padding-top: 60px; padding-bottom: 60px; margin-bottom: 0;">
+    <section class="section text-white" style="background-color: #000000; padding-top: 60px; padding-bottom: 60px; margin-bottom: 0;">
       <div class="container-fluid">
         <div class="section-header" style="justify-content: center; border-bottom: none; margin-bottom: 40px;">
-          <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; color: #000000; text-transform: uppercase;">DIE CAST COLLECTION</h2>
+          <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; color: #FFFFFF; text-transform: uppercase;">DIE CAST COLLECTION</h2>
         </div>
         <div class="best-seller-grid">
           ${products.filter(p => p.category === 'Die Cast').slice(0, 4).map(product => `
@@ -74,8 +114,8 @@ export function Home() {
                   <img src="${product.altImage || product.image}" alt="${product.name} Alt" class="img-secondary">
                 </div>
                 <div class="best-seller-info">
-                  <h3 class="best-seller-title" style="color: #000; font-weight: 700; letter-spacing: -0.5px;">${product.name}</h3>
-                  <p class="best-seller-price" style="color: #333;">From Rs. ${product.price.toFixed(2)}</p>
+                  <h3 class="best-seller-title" style="color: #FFF; font-weight: 700; letter-spacing: -0.5px;">${product.name}</h3>
+                  <p class="best-seller-price" style="color: #CCC;">From Rs. ${product.price.toFixed(2)}</p>
                 </div>
               </a>
 
@@ -86,13 +126,13 @@ export function Home() {
                 <img src="${product.altImage || product.image}" class="best-seller-thumb" alt="Variant 4">
               </div>
 
-              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}">Quick Add</button>
+              <button class="cinematic-add-btn btn-add-to-cart" data-id="${product.id}" style="background: #FFF; color: #000;">Quick Add</button>
             </div>
           `).join('')}
         </div>
         
         <div class="text-center" style="margin-top: 60px;">
-          <a href="/shop" class="btn btn-cinematic" style="color: #000; border-color: #000;" data-link>Load more</a>
+          <a href="/shop" class="btn btn-cinematic" style="color: #FFF; border-color: #FFF;" data-link>Load more</a>
         </div>
       </div>
     </section>

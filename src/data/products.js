@@ -1,338 +1,329 @@
 export const products = [
+  // --- CASES (Replaces Clear, Leather, Silicone, Rugged, Designer, Slim, Eco) ---
   {
     id: 1,
-    name: "Crystal Clear MagSafe ",
+    name: "Crystal Clear MagSafe",
     price: 1200.00,
     image: "https://thecasefactory.in/cdn/shop/files/485-2_d57d7829-6bba-4e8b-8dee-94b5ddbbad63.png?v=1755165606&width=1000",
-    category: "Clear Cases",
+    category: "Cases",
     rating: 4.8,
     reviews: 124,
     isNew: true,
     isBestSeller: true,
-    description: "Show off your iPhone's design with this crystal clear, non-yellowing MagSafe case. Military-grade drop protection."
+    description: "Show off your iPhone's design with this crystal clear, non-yellowing MagSafe case."
   },
   {
     id: 2,
     name: "Leather Wallet Case",
     price: 2500.00,
     image: "https://thecasefactory.in/cdn/shop/files/477-1_ca0ab943-b067-4462-b7a4-e8e7508c4b32.png?v=1755165729&width=1000",
-    category: "Leather Cases",
+    category: "Cases",
     rating: 4.9,
     reviews: 85,
     isNew: false,
     isBestSeller: true,
-    description: "Premium genuine leather case with built-in card slots. Ages beautifully with a unique patina over time."
+    description: "Premium genuine leather case with built-in card slots."
   },
   {
     id: 3,
-    name: "Silicone Soft  - Midnight",
+    name: "Silicone Soft - Midnight",
     price: 1500.00,
     image: "https://thecasefactory.in/cdn/shop/files/473-1_8cab7b18-03fa-4fef-a898-44afc7e2b7d8.png?v=1755165781&width=1000",
-    category: "Silicone Cases",
+    category: "Cases",
     rating: 4.7,
     reviews: 210,
     isNew: false,
     isBestSeller: true,
-    description: "Silky soft-touch finish with a microfiber lining to protect your iPhone. Available in multiple colors."
+    description: "Silky soft-touch finish with a microfiber lining."
   },
   {
     id: 4,
     name: "Rugged Armor Pro",
     price: 1800.00,
     image: "https://thecasefactory.in/cdn/shop/files/428-2_927ecaf0-ce23-4038-ba79-5fc0ded490d9.png?v=1755170836&width=1000",
-    category: "Rugged Cases",
+    category: "Cases",
     rating: 4.6,
     reviews: 150,
     isNew: true,
     isBestSeller: true,
-    description: "Heavy-duty protection for the toughest environments. Dual-layer design with shock-absorption technology."
+    description: "Heavy-duty protection for the toughest environments."
   },
   {
     id: 5,
     name: "Abstract Art Case",
     price: 1350.00,
     image: "https://thecasefactory.in/cdn/shop/files/440-2_3db83c35-75ce-4a6f-9012-9c213759ab98.png?v=1755170003&width=1000",
-    category: "Designer Cases",
+    category: "Cases",
     rating: 4.5,
     reviews: 45,
     isNew: true,
     isBestSeller: false,
-    description: "Unique abstract art design printed on a durable, slim profile case. Scratch-resistant finish."
+    description: "Unique abstract art design printed on a durable, slim profile case."
   },
   {
     id: 6,
     name: "Carbon Fiber Ultra Slim",
     price: 2200.00,
     image: "https://thecasefactory.in/cdn/shop/files/458-2_8691226d-4bd7-4099-9e00-004a9eedf901.png?v=1755167722&width=1000",
-    category: "Slim Cases",
+    category: "Cases",
     rating: 4.8,
     reviews: 92,
     isNew: false,
     isBestSeller: true,
-    description: "Real aramid fiber construction. incredibly light and thin, yet stronger than steel."
+    description: "Real aramid fiber construction. incredibly light and thin."
   },
   {
-    id: 7,
-    name: "Biodegradable Eco Case",
-    price: 1600.00,
-    image: "https://thecasefactory.in/cdn/shop/files/444-2_65da1192-3ff4-4852-8d32-ec46330f7f67.png?v=1755169695&width=1000",
-    category: "Eco-Friendly",
-    rating: 4.4,
-    reviews: 67,
-    isNew: false,
-    isBestSeller: false,
-    description: "100% compostable plant-based material. Protect your phone and the planet."
-  },
-  {
-    id: 8,
-    name: "Neon Glow Sand Case",
-    price: 1450.00,
-    image: "https://thecasefactory.in/cdn/shop/files/445-2_91906596-2380-40e5-afde-de536aeea4ab.png?v=1755169623&width=1000",
-    category: "Designer Cases",
-    rating: 4.3,
-    reviews: 34,
-    isNew: true,
-    isBestSeller: false,
-    description: "Glow in the dark liquid sand case. Mesmerizing flow effect that lights up at night."
-  },
-  {
-    id: 9,
-    name: "Marble Stone Case",
-    price: 1650.00,
-    image: "https://thecasefactory.in/cdn/shop/files/420-2_68b57f30-b912-4e64-906c-8786e4c1013d.png?v=1755171399&width=1000",
-    category: "Designer Cases",
-    rating: 4.6,
-    reviews: 56,
-    isNew: false,
-    isBestSeller: false,
-    description: "Elegant marble pattern with gold accents. Slim and protective."
-  },
-  {
-    id: 10,
-    name: "Waterproof Dive Case",
-    price: 2800.00,
-    image: "https://thecasefactory.in/cdn/shop/files/423-2_dc468aa8-49ca-4291-aea5-ea0d28da8b34.png?v=1755171214&width=1000",
-    category: "Rugged Cases",
-    rating: 4.9,
-    reviews: 42,
-    isNew: true,
-    isBestSeller: false,
-    description: "IP68 waterproof rating for underwater photography. Full 360 protection."
-  },
-  {
-    id: 11,
-    name: "Vintage Leather Back",
-    price: 2600.00,
-    image: "https://thecasefactory.in/cdn/shop/files/479-1.png?v=1755165699&width=1000",
-    category: "Leather Cases",
-    rating: 4.7,
-    reviews: 89,
-    isNew: false,
-    isBestSeller: true,
-    description: "Handcrafted from full-grain leather. Develops a rich character with use."
-  },
-  {
-    id: 12,
-    name: "Ultra-Thin Matte",
+    id: 29,
+    name: "Anti-Yellow Clear Case",
     price: 999.00,
-    image: "https://thecasefactory.in/cdn/shop/files/471-2_809c8e12-e7ce-429e-888e-c2cbbd43f439.png?v=1755165963&width=1000",
-    category: "Slim Cases",
-    rating: 4.4,
-    reviews: 112,
-    isNew: false,
-    isBestSeller: true,
-    description: "Barely there feel. Matte finish resists fingerprints and scratches."
-  },
-  {
-    id: 13,
-    name: "Glitter Sparkle Case",
-    price: 1250.00,
-    image: "https://thecasefactory.in/cdn/shop/files/441-2_ad130b5c-ca3a-419d-b43d-66ec692bc12f.png?v=1755169903&width=1000",
-    category: "Designer Cases",
-    rating: 4.5,
-    reviews: 78,
-    isNew: true,
-    isBestSeller: true,
-    description: "Embedded glitter that won't flake off. Adds a touch of sparkle to your device."
-  },
-  {
-    id: 14,
-    name: "Wood Grain Series",
-    price: 1900.00,
-    image: "https://thecasefactory.in/cdn/shop/files/456-2_4081fbdc-0c30-41fe-b126-78558d1f4225.png?v=1755168110&width=1000",
-    category: "Eco-Friendly",
-    rating: 4.6,
-    reviews: 65,
-    isNew: false,
-    isBestSeller: false,
-    description: "Real wood veneer back. Natural texture and unique grain patterns."
-  },
-  {
-    id: 15,
-    name: "Battery Case 5000mAh",
-    price: 4500.00,
-    image: "https://images.unsplash.com/photo-1574614395856-4244510b6c62?auto=format&fit=crop&q=80&w=600",
-    category: "Rugged Cases",
-    rating: 4.2,
-    reviews: 28,
-    isNew: true,
-    isBestSeller: false,
-    description: "Extended battery life on the go. Intelligent charging management."
-  },
-  {
-    id: 16,
-    name: "Alcantara Sport",
-    price: 2100.00,
-    image: "https://images.unsplash.com/photo-1541876526-9c440a5a6538?auto=format&fit=crop&q=80&w=600",
-    category: "Silicone Cases",
-    rating: 4.8,
-    reviews: 55,
-    isNew: false,
-    isBestSeller: false,
-    description: "Premium Alcantara material used in sports cars. Soft, durable, and grippy."
-  },
-  {
-    id: 17,
-    name: "Holographic Prism",
-    price: 1550.00,
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600",
-    category: "Designer Cases",
-    rating: 4.3,
-    reviews: 40,
-    isNew: true,
-    isBestSeller: false,
-    description: "Reflects light in a spectrum of colors. A futuristic look for your device."
-  },
-  {
-    id: 18,
-    name: "Bamboo Natural",
-    price: 1850.00,
-    image: "https://images.unsplash.com/photo-1590156546946-ce55a12a6a5d?auto=format&fit=crop&q=80&w=600",
-    category: "Eco-Friendly",
-    rating: 4.7,
-    reviews: 62,
-    isNew: false,
-    isBestSeller: false,
-    description: "Sustainable bamboo back with a soft-touch bumper. Eco-conscious style."
-  },
-  {
-    id: 19,
-    name: "Heavy Duty Defender",
-    price: 2300.00,
-    image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&q=80&w=600",
-    category: "Rugged Cases",
-    rating: 4.5,
-    reviews: 98,
-    isNew: false,
-    isBestSeller: false,
-    description: "Multi-layer protection against drops, dust, and scratches. Built to last."
-  },
-  {
-    id: 20,
-    name: "Liquid Silicone - Red",
-    price: 1500.00,
     image: "https://thecasefactory.in/cdn/shop/files/485-2_d57d7829-6bba-4e8b-8dee-94b5ddbbad63.png?v=1755165606&width=1000",
-    category: "Silicone Cases",
-    rating: 4.6,
-    reviews: 130,
-    isNew: false,
-    isBestSeller: false,
-    description: "Vibrant red silicone case. Soft to the touch and easy to grip."
-  },
-  {
-    id: 21,
-    name: "Geometric Pattern",
-    price: 1400.00,
-    image: "https://images.unsplash.com/photo-1558478551-1a378f63328e?auto=format&fit=crop&q=80&w=600",
-    category: "Designer Cases",
-    rating: 4.4,
-    reviews: 48,
-    isNew: true,
-    isBestSeller: false,
-    description: "Modern geometric shapes in a monochrome palette. Stylish and protective."
-  },
-  {
-    id: 22,
-    name: "Recycled Ocean Plastic",
-    price: 1700.00,
-    image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=600",
-    category: "Eco-Friendly",
+    category: "Cases",
     rating: 4.5,
-    reviews: 75,
-    isNew: false,
-    isBestSeller: false,
-    description: "Made from recycled ocean plastics. Help clean the oceans with every purchase."
-  },
-  {
-    id: 23,
-    name: "Metal Bumper Case",
-    price: 2000.00,
-    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&q=80&w=600",
-    category: "Slim Cases",
-    rating: 4.2,
-    reviews: 33,
-    isNew: false,
-    isBestSeller: false,
-    description: "Minimalist aluminum bumper to protect edges while showing off the back."
-  },
-  {
-    id: 24,
-    name: "Gradient Glass",
-    price: 1600.00,
-    image: "https://images.unsplash.com/photo-1550029402-226115b7c579?auto=format&fit=crop&q=80&w=600",
-    category: "Designer Cases",
-    rating: 4.6,
-    reviews: 50,
+    reviews: 80,
     isNew: true,
     isBestSeller: false,
-    description: "Tempered glass back with a beautiful color gradient. Scratch resistant."
+    description: "Long-lasting clarity with anti-yellowing technology."
   },
+
+  // --- DIE CAST (Renamed from Die Cast to DieCast) ---
   {
     id: 25,
     name: "Porsche 911 GT3 RS",
     price: 3500.00,
     image: "https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&q=80&w=600",
-    category: "Die Cast",
+    category: "DieCast",
     rating: 4.9,
     reviews: 42,
     isNew: true,
     isBestSeller: true,
-    description: "1:18 scale model of the legendary Porsche 911 GT3 RS. Intricate details and opening parts."
+    description: "1:18 scale model of the legendary Porsche 911 GT3 RS."
   },
   {
     id: 26,
     name: "Lamborghini Aventador",
     price: 3800.00,
     image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=600",
-    category: "Die Cast",
+    category: "DieCast",
     rating: 4.8,
     reviews: 35,
     isNew: true,
     isBestSeller: false,
-    description: "Detailed 1:24 scale replica of the Lamborghini Aventador. Matte black finish."
-  },
-  {
-    id: 27,
-    name: "Ford Mustang 1967",
-    price: 2900.00,
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600",
-    category: "Die Cast",
-    rating: 4.7,
-    reviews: 58,
-    isNew: false,
-    isBestSeller: true,
-    description: "Classic 1967 Ford Mustang GT Fastback. 1:18 scale with authentic interior."
+    description: "Detailed 1:24 scale replica of the Lamborghini Aventador."
   },
   {
     id: 28,
     name: "Nissan GT-R R35",
     price: 3200.00,
     image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=600",
-    category: "Die Cast",
+    category: "DieCast",
     rating: 4.9,
     reviews: 64,
     isNew: false,
     isBestSeller: true,
-    description: "The Godzilla of supercars. 1:18 scale Nissan GT-R R35 with working suspension."
+    description: "The Godzilla of supercars. 1:18 scale Nissan GT-R R35."
+  },
+
+  // --- CHARGERS ---
+  {
+    id: 40,
+    name: "GaN Fast Charger 65W",
+    price: 1999.00,
+    image: "https://images.unsplash.com/photo-1583863788434-e58a36330cfd?auto=format&fit=crop&q=80&w=600",
+    category: "Chargers",
+    rating: 4.8,
+    reviews: 156,
+    isNew: true,
+    isBestSeller: true,
+    description: "Compact high-speed charger for laptops and phones."
+  },
+  {
+    id: 41,
+    name: "Wireless MagCharge Pad",
+    price: 1499.00,
+    image: "https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&q=80&w=600",
+    category: "Chargers",
+    rating: 4.6,
+    reviews: 89,
+    isNew: false,
+    isBestSeller: false,
+    description: "Magnetic wireless charging with 15W output."
+  },
+
+  // --- CABLES ---
+  {
+    id: 42,
+    name: "Braided USB-C Cable (2m)",
+    price: 599.00,
+    image: "https://images.unsplash.com/photo-1542382256769-0891a999b6df?auto=format&fit=crop&q=80&w=600",
+    category: "Cables",
+    rating: 4.7,
+    reviews: 320,
+    isNew: false,
+    isBestSeller: true,
+    description: "Durable nylon braided data and charging cable."
+  },
+  {
+    id: 43,
+    name: "Thunderbolt 4 Pro Cable",
+    price: 2999.00,
+    image: "https://images.unsplash.com/photo-1625244585141-83d47f9be696?auto=format&fit=crop&q=80&w=600",
+    category: "Cables",
+    rating: 4.9,
+    reviews: 45,
+    isNew: true,
+    isBestSeller: false,
+    description: "High-speed data transfer up to 40Gbps."
+  },
+
+  // --- POWERBANKS ---
+  {
+    id: 44,
+    name: "UltraCompact 10000mAh",
+    price: 1299.00,
+    image: "https://images.unsplash.com/photo-1609592424009-548c7c2763fe?auto=format&fit=crop&q=80&w=600",
+    category: "Powerbanks",
+    rating: 4.5,
+    reviews: 210,
+    isNew: false,
+    isBestSeller: true,
+    description: "Pocket-sized power for your daily needs."
+  },
+  {
+    id: 45,
+    name: "Solar Power Bank 20000mAh",
+    price: 2499.00,
+    image: "https://images.unsplash.com/photo-1621259020478-f7566270b77b?auto=format&fit=crop&q=80&w=600",
+    category: "Powerbanks",
+    rating: 4.3,
+    reviews: 78,
+    isNew: true,
+    isBestSeller: false,
+    description: "Rugged power bank with solar charging capability."
+  },
+
+  // --- GADGETS ---
+  {
+    id: 46,
+    name: "Smart Ring Tracker",
+    price: 4999.00,
+    image: "https://images.unsplash.com/photo-1616423664037-c75c5e8ebc76?auto=format&fit=crop&q=80&w=600",
+    category: "Gadgets",
+    rating: 4.4,
+    reviews: 34,
+    isNew: true,
+    isBestSeller: true,
+    description: "Health tracking in a discreet form factor."
+  },
+  {
+    id: 47,
+    name: "Mini Drone 4K",
+    price: 8999.00,
+    image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=600",
+    category: "Gadgets",
+    rating: 4.7,
+    reviews: 56,
+    isNew: true,
+    isBestSeller: false,
+    description: "Foldable drone with 4K camera and 30min flight time."
+  },
+
+  // --- MARSHALL ---
+  {
+    id: 48,
+    name: "Marshall Emberton II",
+    price: 14999.00,
+    image: "https://images.unsplash.com/photo-1616763355548-1b606f439f86?auto=format&fit=crop&q=80&w=600",
+    category: "Marshall",
+    rating: 4.9,
+    reviews: 112,
+    isNew: false,
+    isBestSeller: true,
+    description: "Iconic sound in a portable waterproof speaker."
+  },
+  {
+    id: 49,
+    name: "Marshall Major IV",
+    price: 11999.00,
+    image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=600",
+    category: "Marshall",
+    rating: 4.8,
+    reviews: 88,
+    isNew: false,
+    isBestSeller: true,
+    description: "80+ hours of wireless playtime and ergonomic design."
+  },
+
+  // --- SONY ---
+  {
+    id: 50,
+    name: "Sony WH-1000XM5",
+    price: 26990.00,
+    image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=600",
+    category: "Sony",
+    rating: 4.9,
+    reviews: 345,
+    isNew: true,
+    isBestSeller: true,
+    description: "Processors control 8 microphones for unprecedented noise cancellation."
+  },
+  {
+    id: 51,
+    name: "Sony WF-1000XM5",
+    price: 19990.00,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600",
+    category: "Sony",
+    rating: 4.7,
+    reviews: 210,
+    isNew: true,
+    isBestSeller: false,
+    description: "The best noise cancelling earbuds with astonishing sound quality."
+  },
+  {
+    id: 52,
+    name: "Marshall Acton III",
+    price: 24999.00,
+    image: "https://images.unsplash.com/photo-1629828751540-8f96e2f9d510?auto=format&fit=crop&q=80&w=600",
+    category: "Marshall",
+    rating: 4.8,
+    reviews: 65,
+    isNew: true,
+    isBestSeller: false,
+    description: "Room-filling sound in a compact size. Bluetooth 5.2."
+  },
+  {
+    id: 53,
+    name: "Marshall Motif II A.N.C.",
+    price: 17999.00,
+    image: "https://images.unsplash.com/photo-1605557626697-2e87166d88f9?auto=format&fit=crop&q=80&w=600",
+    category: "Marshall",
+    rating: 4.6,
+    reviews: 40,
+    isNew: false,
+    isBestSeller: false,
+    description: "Active noise cancelling with 30 hours of wireless playtime."
+  },
+  {
+    id: 54,
+    name: "Sony LinkBuds S",
+    price: 12990.00,
+    image: "https://images.unsplash.com/photo-1610427847953-b2b51268b643?auto=format&fit=crop&q=80&w=600",
+    category: "Sony",
+    rating: 4.5,
+    reviews: 95,
+    isNew: false,
+    isBestSeller: true,
+    description: "Never off. Ultra-light and comfortable for all-day wear."
+  },
+  {
+    id: 55,
+    name: "Sony SRS-XB100",
+    price: 4990.00,
+    image: "https://images.unsplash.com/photo-1608223652516-17b5cc969df2?auto=format&fit=crop&q=80&w=600",
+    category: "Sony",
+    rating: 4.7,
+    reviews: 150,
+    isNew: true,
+    isBestSeller: true,
+    description: "Portable wireless speaker with powerful surround sound."
   }
 ];
